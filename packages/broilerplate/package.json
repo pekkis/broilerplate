@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -17,7 +17,6 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
   "peerDependencies": {
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.3.0",
