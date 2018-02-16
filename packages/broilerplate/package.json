@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "url": "https://github.com/pekkis/broilerplate.git"
   },
   "bin": {
-    "broilerplate": "./bin/react-scripts.js"
+    "broilerplate": "./bin/broilerplate.js"
   },
   "author": "",
   "license": "ISC",
