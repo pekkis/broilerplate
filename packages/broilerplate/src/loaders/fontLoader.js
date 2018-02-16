@@ -1,6 +1,7 @@
 const { fromJS } = require("immutable");
 
 module.exports = {
+  name: () => "fontLoader",
   isEnabled: (env, target) => true,
   defaults: (env, target, paths) => {
     return fromJS({

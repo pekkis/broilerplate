@@ -63,23 +63,21 @@ const isPluginEnabled = (env, target, spec) => {
   return plugin.isEnabled(env, target);
 };
 
-const configureLoader = (env, target, paths, loaderName, overrides) => {
-  const loader = getLoader(loaderName);
+const configureLoader = (env, target, paths, loader, overrides) => {
   const defaults = loader.defaults(env, target, paths);
 
   const options = overrides.reduce(
-    (v, o) => o(v, env, target, paths, loaderName),
+    (v, o) => o(v, env, target, paths, loader.name()),
     defaults
   );
   return loader.post ? loader.post(env, target, options) : options;
 };
 
-const configurePlugin = (env, target, paths, pluginName, overrides) => {
-  const plugin = getPlugin(pluginName);
+const configurePlugin = (env, target, paths, plugin, overrides) => {
   const defaults = plugin.defaults(env, target, paths);
 
   const options = overrides.reduce(
-    (v, o) => o(v, env, target, paths, pluginName),
+    (v, o) => o(v, env, target, paths, plugin.name()),
     defaults
   );
 
@@ -130,14 +128,14 @@ const baseConfig = (env, target, paths) => {
     plugins: []
   });
 
-  if (target === "server") {
-    baseConfig = baseConfig
-      .set("target", "node")
-      .setIn(["output", "library"], "app")
-      .setIn(["output", "libraryTarget"], "commonjs2");
+  if (target !== "server") {
+    return baseConfig;
   }
 
-  return baseConfig;
+  return baseConfig
+    .set("target", "node")
+    .setIn(["output", "library"], "app")
+    .setIn(["output", "libraryTarget"], "commonjs2");
 };
 
 module.exports = {
@@ -146,5 +144,8 @@ module.exports = {
   configurePlugin,
   isPluginEnabled,
   configureWebpack,
-  getFeatures
+  getFeatures,
+  getPlugin,
+  getFeature,
+  getLoader
 };

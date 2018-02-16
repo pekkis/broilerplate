@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "basicOptimizationFeature",
   plugins: () =>
     OrderedSet.of("occurrenceOrderPlugin", "moduleConcatenationPlugin"),
   loaders: () => OrderedSet.of(),

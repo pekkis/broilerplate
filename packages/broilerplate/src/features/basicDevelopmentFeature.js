@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "basicDevelopmentFeature",
   plugins: () =>
     OrderedSet.of(
       "caseSensitivePathsPlugin",

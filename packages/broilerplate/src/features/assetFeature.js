@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "assetFeature",
   plugins: () => OrderedSet.of("copyFilesPlugin"),
   loaders: () => OrderedSet.of("imageLoader", "fontLoader"),
   overrideLoader: (values, env, target, paths, key) => values,

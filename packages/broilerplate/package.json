@@ -4,7 +4,7 @@
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "scripts": {
-    "build": "NODE_ENV=production babel src -d lib && NODE_ENV=production babel src-bin -d bin",
+    "build": "NODE_ENV=production babel src -d lib",
     "build:client": "cross-env NODE_ENV=production webpack --progress --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
     "build:server": "cross-env NODE_ENV=production webpack --progress --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
     "build:node": "cross-env NODE_ENV=production babel __test-app__/src/index.js > __test-app__/dist-server/index.js",
@@ -13,12 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pekkis/broilerplate.git"
+    "url": "https://github.com/pekkis/broilerplate-lerna.git"
   },
-  "bin": {
-    "broilerplate": "./bin/broilerplate.js"
-  },
-  "author": "",
+  "author": "pekkis",
   "license": "ISC",
   "peerDependencies": {
     "babel-loader": "^7.1.2",

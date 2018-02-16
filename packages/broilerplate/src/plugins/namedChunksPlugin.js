@@ -4,6 +4,7 @@ const path = require("path");
 const Plugin = webpack.NamedChunksPlugin;
 
 module.exports = {
+  name: () => "namedChunksPlugin",
   isEnabled: (env, target) => true,
   defaults: (env, target, paths) =>
     List.of(chunk => {

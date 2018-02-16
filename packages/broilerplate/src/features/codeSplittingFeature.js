@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "codeSplittingFeature",
   plugins: () => OrderedSet.of("vendorBundlePlugin", "metaBundlePlugin"),
   loaders: () => OrderedSet.of(),
   overrideLoader: (values, env, target, paths, key) => values,

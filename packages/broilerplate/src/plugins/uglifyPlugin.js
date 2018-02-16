@@ -2,6 +2,7 @@ const { List, Map } = require("immutable");
 const Plugin = require("webpack").optimize.UglifyJsPlugin;
 
 module.exports = {
+  name: () => "uglifyPlugin",
   isEnabled: (env, target) => env === "production" && target === "client",
   defaults: (env, target, paths) =>
     List.of(

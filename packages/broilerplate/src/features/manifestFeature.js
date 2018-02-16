@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "manifestFeature",
   plugins: () => OrderedSet.of("manifestPlugin"),
   loaders: () => OrderedSet.of(),
   overrideLoader: (values, env, target, paths, key) => values,

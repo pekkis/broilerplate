@@ -4,6 +4,7 @@ const Plugin = webpack.DefinePlugin;
 const { getEnvironmentVariables } = require("../env");
 
 module.exports = {
+  name: () => "definePlugin",
   isEnabled: (env, target) => true,
   defaults: (env, target, paths) =>
     List.of(

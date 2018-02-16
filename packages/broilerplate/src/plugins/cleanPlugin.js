@@ -2,6 +2,7 @@ const { List, Map } = require("immutable");
 const Plugin = require("clean-webpack-plugin");
 
 module.exports = {
+  name: () => "cleanPlugin",
   isEnabled: (env, target) => env === "production",
   defaults: (env, target, paths) =>
     List.of(

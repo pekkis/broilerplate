@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "pekkisHybridCssFeature",
   plugins: () => OrderedSet.of("cssExtractPlugin"),
   loaders: () => OrderedSet.of("postcssLoader", "externalcssLoader"),
   overrideLoader: (values, env, target, paths, key) => {

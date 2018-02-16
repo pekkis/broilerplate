@@ -22,6 +22,7 @@ const getTargets = (env, target, paths) => {
 };
 
 module.exports = {
+  name: () => "babelLoader",
   isEnabled: (env, target) => true,
   defaults: (env, target, paths) => {
     return fromJS({

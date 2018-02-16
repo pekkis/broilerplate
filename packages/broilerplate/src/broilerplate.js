@@ -5,14 +5,16 @@ const {
   configurePlugin,
   getFeatures,
   isPluginEnabled,
-  configureWebpack
+  configureWebpack,
+  getPlugin,
+  getLoader
 } = require("./configure");
 
 const createStyleLoader = require("./createStyleLoader");
 const defaultPaths = require("./defaultPaths");
 
 const broilerplate = (env, target, paths, overrides) => {
-  let features = OrderedSet.of(
+  let _features = OrderedSet.of(
     "babelFeature",
     // "babelMinifyFeature",
     "basicDevelopmentFeature",
@@ -25,8 +27,8 @@ const broilerplate = (env, target, paths, overrides) => {
     "manifestFeature"
   );
 
-  let loaders = OrderedSet.of();
-  let plugins = OrderedSet.of();
+  let _loaders = OrderedSet.of();
+  let _plugins = OrderedSet.of();
 
   let removedLoaders = OrderedSet.of();
   let removedPlugins = OrderedSet.of();
@@ -52,22 +54,34 @@ const broilerplate = (env, target, paths, overrides) => {
       return broilerplate;
     },
 
+    build: () => {
+      const features = getFeatures(env, target, paths, _features);
+
+      const loaders = features
+        .reduce((loaders, f) => loaders.concat(f.loaders()), _loaders)
+        .map(l => getLoader(l))
+        .filterNot(l => removedLoaders.includes(l.name()));
+
+      const plugins = features
+        .reduce((plugins, f) => plugins.concat(f.plugins()), _plugins)
+        .map(p => getPlugin(p))
+        .filterNot(p => removedLoaders.includes(p.name()));
+
+      return {
+        features,
+        loaders,
+        plugins
+      };
+    },
+
     run: () => {
+      const { features, loaders, plugins } = broilerplate.build();
+
       const {
         overrideLoader,
         overridePlugin,
         overrideWebpackConfiguration
       } = overrides;
-
-      features = getFeatures(env, target, paths, features);
-
-      loaders = features
-        .reduce((loaders, f) => loaders.concat(f.loaders()), loaders)
-        .subtract(removedLoaders);
-
-      plugins = features
-        .reduce((plugins, f) => plugins.concat(f.plugins()), plugins)
-        .subtract(removedPlugins);
 
       const overrideForLoaders = List.of(
         overrideLoader,
@@ -110,15 +124,6 @@ const broilerplate = (env, target, paths, overrides) => {
         (v, o) => o(v, env, target, paths),
         configureWebpack(env, target, paths, runLoaders, runPlugins)
       );
-
-      /*
-      const config = overrideWebpackConfiguration(
-        env,
-        target,
-        paths,
-        configureWebpack(env, target, paths, runLoaders, runPlugins)
-      );
-      */
 
       return config.toJS();
     }

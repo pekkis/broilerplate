@@ -1,6 +1,7 @@
 const { OrderedSet } = require("immutable");
 
 module.exports = {
+  name: () => "babelMinifyFeature",
   plugins: () => OrderedSet.of("babelMinifyPlugin"),
   loaders: () => OrderedSet.of(),
   overrideLoader: (values, env, target, paths, key) => values,

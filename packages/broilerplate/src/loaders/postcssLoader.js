@@ -6,6 +6,7 @@ const getLoader = target => {
 };
 
 module.exports = {
+  name: () => "postcssLoader",
   isEnabled: (env, target) => true,
 
   post: (env, target, options) => {

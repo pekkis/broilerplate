@@ -2,6 +2,7 @@ const { OrderedSet } = require("immutable");
 // const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
+  name: () => "serverRenderFeature",
   plugins: () => OrderedSet.of(),
   loaders: () => OrderedSet.of(),
   overrideLoader: (values, env, target, paths, key) => values,
