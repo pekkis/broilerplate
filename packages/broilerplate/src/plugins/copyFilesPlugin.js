@@ -5,6 +5,6 @@ module.exports = {
   name: () => "copyFilesPlugin",
   isEnabled: (env, target) => target === "client",
   defaults: (env, target, paths) =>
-    List.of(fromJS([{ from: "assets/web/*.*", flatten: true }])),
+    List.of(fromJS([{ from: "assets/web", flatten: false }])),
   plugin: options => new Plugin(...options)
 };
