@@ -65,7 +65,7 @@ const broilerplate = (env, target, paths, overrides) => {
       const plugins = features
         .reduce((plugins, f) => plugins.concat(f.plugins()), _plugins)
         .map(p => getPlugin(p))
-        .filterNot(p => removedLoaders.includes(p.name()));
+        .filterNot(p => removedPlugins.includes(p.name()));
 
       return {
         features,
