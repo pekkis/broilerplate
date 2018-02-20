@@ -45,12 +45,12 @@ const broilerplate = (env, target, paths, overrides) => {
     },
 
     addFeature: feature => {
-      features = features.add(feature);
+      _features = _features.add(feature);
       return broilerplate;
     },
 
     removeFeature: feature => {
-      features = features.filterNot(f => f === feature);
+      _features = _features.filterNot(f => f === feature);
       return broilerplate;
     },
 
