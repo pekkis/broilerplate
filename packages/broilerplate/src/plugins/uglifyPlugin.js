@@ -1,22 +1,19 @@
-const { List, Map } = require("immutable");
-const Plugin = require("webpack").optimize.UglifyJsPlugin;
+const { List, fromJS } = require("immutable");
+const UglifyPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   name: () => "uglifyPlugin",
   isEnabled: (env, target) => env === "production" && target === "client",
   defaults: (env, target, paths) =>
     List.of(
-      Map({
-        mangle: false,
-        compress: {
-          dead_code: true,
-          unsafe: false,
-          unused: false,
-          hoist_vars: false,
-          side_effects: false,
-          global_defs: {}
+      fromJS({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          mangle: true,
+          compress: true
         }
       })
     ),
-  plugin: options => Plugin(...options)
+  plugin: options => new UglifyPlugin(...options)
 };

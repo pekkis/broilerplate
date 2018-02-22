@@ -23,6 +23,26 @@ test("runs with defaults for production / client", () => {
   expect(typeof config).toBe("object");
 });
 
+test("removes a plugin", () => {
+  const bp = broilerplate("production", "client", paths, overrides);
+  expect(typeof bp).toBe("object");
+
+  const { plugins } = bp.build();
+
+  const p = plugins.find(p => p.name() === "namedChunksPlugin");
+  expect(typeof p).toBe("object");
+
+  bp.removePlugin("namedChunksPlugin");
+
+  const { plugins: plugins2 } = bp.build();
+
+  const p2 = plugins2.find(p => p.name() === "namedChunksPlugin");
+  expect(typeof p2).toBe("undefined");
+
+  const config = bp.run();
+  console.log(config);
+});
+
 test("runs with defaults for development / client", () => {
   const bp = broilerplate("development", "client", paths, overrides);
   expect(typeof bp).toBe("object");

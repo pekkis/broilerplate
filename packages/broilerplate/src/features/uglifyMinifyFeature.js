@@ -2,7 +2,7 @@ const { OrderedSet } = require("immutable");
 
 module.exports = {
   name: () => "uglifyMinifyFeature",
-  plugins: () => OrderedSet.of("uglifyMinifyPlugin"),
+  plugins: () => OrderedSet.of("uglifyPlugin"),
   loaders: () => OrderedSet.of(),
   overrideLoader: (values, env, target, paths, key) => values,
   overridePlugin: (values, env, target, paths, key) => values,

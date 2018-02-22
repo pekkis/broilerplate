@@ -10,5 +10,9 @@ module.exports = target => {
     ...defaultPaths(env, target, __dirname),
     modules: path.resolve(__dirname, "../node_modules")
   };
-  return broilerplate(env, target, paths, overrides).run();
+  return (
+    broilerplate(env, target, paths, overrides)
+      // .addFeature("uglifyMinifyFeature")
+      .run()
+  );
 };
