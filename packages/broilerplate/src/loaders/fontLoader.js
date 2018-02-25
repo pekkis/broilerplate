@@ -3,7 +3,7 @@ const { fromJS } = require("immutable");
 module.exports = {
   name: () => "fontLoader",
   isEnabled: (env, target) => true,
-  defaults: (env, target, paths) => {
+  options: (env, target, paths) => {
     return fromJS({
       test: /font.*\.(woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       include: [paths.src, paths.modules],

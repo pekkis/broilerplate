@@ -4,7 +4,7 @@ const isFunction = require("lodash.isfunction");
 const { fromJS, List } = require("immutable");
 
 const defaultPlugin = {
-  defaults: () => List.of(undefined),
+  options: () => List.of(undefined),
   plugin: () => {
     throw new Error("Can not instantiate plugin");
   },
@@ -29,11 +29,11 @@ const getFeature = getObjectFromSpec("features");
 
 const getPlugin = (...specs) => {
   if (specs.length > 1 || isFunction(specs[0])) {
-    const [plugin, isEnabled, defaults] = specs;
+    const [plugin, isEnabled, options] = specs;
     return {
       plugin: plugin || defaultPlugin.plugin,
       isEnabled: isEnabled || defaultPlugin.isEnabled,
-      defaults: defaults || defaultPlugin.defaults
+      options: options || defaultPlugin.options
     };
   }
 
@@ -53,42 +53,14 @@ const getPlugin = (...specs) => {
   };
 };
 
-const isLoaderEnabled = (env, target, spec) => {
-  const loader = getLoader(spec);
-  return loader.isEnabled ? loader.isEnabled(env, target) : true;
+const buildLoader = (env, target, paths, loader) => {
+  return loader.post
+    ? loader.post(env, target, loader.options(env, target, paths))
+    : loader.options(env, target, paths);
 };
 
-const isPluginEnabled = (env, target, spec) => {
-  const plugin = getPlugin(spec);
-  return plugin.isEnabled(env, target);
-};
-
-const configureLoader = (env, target, paths, loader, overrides) => {
-  const defaults = loader.defaults(env, target, paths);
-
-  const options = overrides.reduce(
-    (v, o) => o(v, env, target, paths, loader.name()),
-    defaults
-  );
-  return loader.post ? loader.post(env, target, options) : options;
-};
-
-const configurePlugin = (env, target, paths, plugin, overrides) => {
-  const defaults = plugin.defaults(env, target, paths);
-
-  const options = overrides.reduce(
-    (v, o) => o(v, env, target, paths, plugin.name()),
-    defaults
-  );
-
-  const toPlugin = options.toJS();
-  return plugin.plugin(toPlugin);
-};
-
-const configureWebpack = (env, target, paths, loaders, plugins) => {
-  return baseConfig(env, target, paths)
-    .setIn(["module", "rules"], loaders)
-    .set("plugins", plugins);
+const buildPlugin = (env, target, paths, plugin) => {
+  return plugin.plugin(plugin.options(env, target, paths).toJS());
 };
 
 const getEntry = (env, target) => {
@@ -139,13 +111,11 @@ const baseConfig = (env, target, paths) => {
 };
 
 module.exports = {
-  configureLoader,
-  isLoaderEnabled,
-  configurePlugin,
-  isPluginEnabled,
-  configureWebpack,
   getFeatures,
   getPlugin,
   getFeature,
-  getLoader
+  getLoader,
+  baseConfig,
+  buildLoader,
+  buildPlugin
 };

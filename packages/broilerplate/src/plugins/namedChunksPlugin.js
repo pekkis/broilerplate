@@ -6,7 +6,7 @@ const Plugin = webpack.NamedChunksPlugin;
 module.exports = {
   name: () => "namedChunksPlugin",
   isEnabled: (env, target) => true,
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(chunk => {
       if (chunk.name) {
         return chunk.name;

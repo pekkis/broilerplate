@@ -4,7 +4,7 @@ const Plugin = require("babel-minify-webpack-plugin");
 module.exports = {
   name: () => "babelMinifyPlugin",
   isEnabled: (env, target) => env === "production" && target === "client",
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       Map({
         mangle: false

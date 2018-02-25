@@ -5,7 +5,7 @@ const Plugin = webpack.optimize.CommonsChunkPlugin;
 module.exports = {
   name: () => "vendorBundlePlugin",
   isEnabled: (env, target) => target === "client",
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       fromJS({
         name: "vendor",

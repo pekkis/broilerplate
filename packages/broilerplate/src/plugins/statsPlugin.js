@@ -4,7 +4,7 @@ const Plugin = require("stats-webpack-plugin");
 module.exports = {
   name: () => "statsPlugin",
   isEnabled: (env, target) => target === "client",
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       "stats.json",
       Map({

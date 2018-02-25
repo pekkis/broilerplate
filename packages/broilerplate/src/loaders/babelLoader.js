@@ -24,7 +24,9 @@ const getTargets = (env, target, paths) => {
 module.exports = {
   name: () => "babelLoader",
   isEnabled: (env, target) => true,
-  defaults: (env, target, paths) => {
+  options: (env, target, paths) => {
+    console.log(env, target, paths, "pooopppa");
+
     return fromJS({
       test: /\.jsx?$/,
       use: [

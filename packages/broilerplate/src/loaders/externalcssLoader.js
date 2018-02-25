@@ -13,7 +13,7 @@ module.exports = {
     return createStyleLoader(env, target, options);
   },
 
-  defaults: (env, target, paths) => {
+  options: (env, target, paths) => {
     return fromJS({
       test: /\.css$/,
       include: [paths.modules],

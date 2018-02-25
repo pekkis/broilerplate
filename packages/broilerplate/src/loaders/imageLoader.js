@@ -3,7 +3,7 @@ const { fromJS } = require("immutable");
 module.exports = {
   name: () => "imageLoader",
   isEnabled: (env, target) => true,
-  defaults: (env, target, paths) => {
+  options: (env, target, paths) => {
     return fromJS({
       test: /\.(png|jpg|gif|ico|svg)$/,
       include: [paths.src],

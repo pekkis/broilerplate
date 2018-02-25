@@ -5,7 +5,7 @@ const Plugin = webpack.optimize.CommonsChunkPlugin;
 module.exports = {
   name: () => "metaBundlePlugin",
   isEnabled: (env, target) => true,
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       fromJS({
         name: "meta",

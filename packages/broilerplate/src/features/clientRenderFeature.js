@@ -1,10 +1,22 @@
-const { OrderedSet } = require("immutable");
+const { OrderedSet, List } = require("immutable");
+const path = require("path");
 
 module.exports = {
   name: () => "clientRenderFeature",
+  files: paths =>
+    List.of(
+      {
+        source: path.join(__dirname, "clientRenderFeature/client.js"),
+        target: path.join(paths.root, "src/client.js")
+      },
+      {
+        source: path.join(__dirname, "clientRenderFeature/Root.js"),
+        target: path.join(paths.root, "src/Root.js")
+      }
+    ),
   plugins: () => OrderedSet.of("htmlPlugin"),
   loaders: () => OrderedSet.of(),
-  overrideLoader: (values, env, target, paths, key) => values,
-  overridePlugin: (values, env, target, paths, key) => values,
+  overrideLoader: (loader, env, target, paths) => loader,
+  overridePlugin: (plugin, env, target, paths) => plugin,
   overrideWebpackConfiguration: (values, env, target, paths) => values
 };

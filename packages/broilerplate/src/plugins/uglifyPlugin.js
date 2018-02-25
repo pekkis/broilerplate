@@ -4,7 +4,7 @@ const UglifyPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   name: () => "uglifyPlugin",
   isEnabled: (env, target) => env === "production" && target === "client",
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       fromJS({
         cache: true,

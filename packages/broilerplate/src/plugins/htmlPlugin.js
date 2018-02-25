@@ -4,7 +4,7 @@ const Plugin = require("html-webpack-plugin");
 module.exports = {
   name: () => "htmlPlugin",
   isEnabled: (env, target) => target === "client",
-  defaults: (env, target, paths) =>
+  options: (env, target, paths) =>
     List.of(
       fromJS({
         title: "Hardcorest React App",
