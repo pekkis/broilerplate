@@ -10,7 +10,8 @@ const {
 const pipe = require("./pipe");
 const getDefaultPaths = require("./defaultPaths");
 const path = require("path");
-const fs = require("fs-extra");
+
+const copy = require("./copy");
 
 const initialize = build => {
   return Map();
@@ -143,13 +144,7 @@ const ensureFiles = (force = false) => build => {
 
   files.forEach(f => {
     const { source, target } = f;
-    fs.ensureDirSync(path.dirname(target));
-
-    console.log("copying from ", source, "to", target);
-
-    fs.copySync(source, target, {
-      overwrite: force
-    });
+    copy(source, target, force);
   });
 
   return build.update("files", List(), f => f.concat(files));
