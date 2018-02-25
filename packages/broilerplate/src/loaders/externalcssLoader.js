@@ -16,7 +16,7 @@ module.exports = {
   options: (env, target, paths) => {
     return fromJS({
       test: /\.css$/,
-      include: [paths.modules],
+      include: [paths.get("modules")],
       use: [
         {
           loader: getLoader(target),

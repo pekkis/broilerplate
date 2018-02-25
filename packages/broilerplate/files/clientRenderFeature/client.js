@@ -11,7 +11,7 @@ render(Root, rootElm);
 
 if (module.hot) {
   module.hot.accept("./Root", () => {
-    const HotReloadedRoot = require("./Root").default;
-    render(HotReloadedRoot, rootElm);
+    const Root = require("./Root").default;
+    render(Root, rootElm);
   });
 }

@@ -6,12 +6,15 @@ module.exports = {
   files: paths =>
     List.of(
       {
-        source: path.join(__dirname, "clientRenderFeature/client.js"),
-        target: path.join(paths.root, "src/client.js")
+        source: path.join(
+          __dirname,
+          "../../files/clientRenderFeature/client.js"
+        ),
+        target: path.join(paths.get("root"), "src/client.js")
       },
       {
-        source: path.join(__dirname, "clientRenderFeature/Root.js"),
-        target: path.join(paths.root, "src/Root.js")
+        source: path.join(__dirname, "../../files/clientRenderFeature/Root.js"),
+        target: path.join(paths.get("root"), "src/Root.js")
       }
     ),
   plugins: () => OrderedSet.of("htmlPlugin"),

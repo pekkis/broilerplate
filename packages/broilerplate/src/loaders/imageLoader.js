@@ -6,7 +6,7 @@ module.exports = {
   options: (env, target, paths) => {
     return fromJS({
       test: /\.(png|jpg|gif|ico|svg)$/,
-      include: [paths.src],
+      include: [paths.get("src")],
       use: [
         {
           loader: "file-loader",

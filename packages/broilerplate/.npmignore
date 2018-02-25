@@ -1,5 +1,4 @@
 src/
-src-bin/
 __tests__/
 __test-app__/
 .babelrc

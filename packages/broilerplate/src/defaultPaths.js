@@ -1,4 +1,5 @@
 const path = require("path");
+const { Map } = require("immutable");
 
 const defaultPaths = (env, target, dirname) => {
   const buildDir = target === "client" ? "./dist" : "./dist-server";
@@ -9,7 +10,7 @@ const defaultPaths = (env, target, dirname) => {
     modules: path.resolve(dirname, "./node_modules")
   };
 
-  return paths;
+  return Map(paths);
 };
 
 module.exports = defaultPaths;

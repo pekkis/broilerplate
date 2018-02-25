@@ -12,7 +12,7 @@ const getBrowsers = root => {
 const getTargets = (env, target, paths) => {
   if (target === "client") {
     return {
-      browsers: getBrowsers(paths.root)
+      browsers: getBrowsers(paths.get("root"))
     };
   }
 
@@ -25,8 +25,6 @@ module.exports = {
   name: () => "babelLoader",
   isEnabled: (env, target) => true,
   options: (env, target, paths) => {
-    console.log(env, target, paths, "pooopppa");
-
     return fromJS({
       test: /\.jsx?$/,
       use: [
@@ -56,7 +54,7 @@ module.exports = {
           }
         }
       ],
-      exclude: [paths.modules]
+      exclude: [paths.get("modules")]
     });
   }
 };

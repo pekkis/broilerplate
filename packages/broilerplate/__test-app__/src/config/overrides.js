@@ -1,25 +1,30 @@
-const loaderOverrides = {};
-
-const pluginOverrides = {
-  htmlPlugin: (env, target, paths, values) =>
-    values.setIn([0, "title"], "Fraktio ERP 3000")
+const loaderOverrides = {
+  babelLoader: (loader, env, target, paths) => {
+    return loader;
+  }
 };
 
-function overrideLoader(defaults, env, target, paths, configKey) {
-  return loaderOverrides[configKey]
-    ? loaderOverrides[configKey](env, target, paths, defaults)
-    : defaults;
-}
+const pluginOverrides = {
+  htmlPlugin: (plugin, env, target, paths) => {
+    return plugin;
+  }
+};
 
-function overridePlugin(defaults, env, target, paths, configKey) {
-  return pluginOverrides[configKey]
-    ? pluginOverrides[configKey](env, target, paths, defaults)
-    : defaults;
-}
+const overrideLoader = (loader, env, target, paths) => {
+  return loaderOverrides[loader.name()]
+    ? loaderOverrides[loader.name()](loader, env, target, paths)
+    : loader;
+};
 
-function overrideWebpackConfiguration(defaults, env, target, paths) {
-  return defaults;
-}
+const overridePlugin = (plugin, env, target, paths) => {
+  return pluginOverrides[plugin.name()]
+    ? pluginOverrides[plugin.name()](plugin, env, target, paths)
+    : plugin;
+};
+
+const overrideWebpackConfiguration = (base, env, target, paths) => {
+  return base;
+};
 
 module.exports = {
   overrideLoader,

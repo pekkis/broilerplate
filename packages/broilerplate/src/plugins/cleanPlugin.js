@@ -8,7 +8,7 @@ module.exports = {
     List.of(
       List.of(target === "client" ? "dist" : "dist-server"),
       Map({
-        root: paths.root
+        root: paths.get("root")
       })
     ),
   plugin: options => new Plugin(...options)

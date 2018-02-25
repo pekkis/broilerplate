@@ -1,9 +1,34 @@
 const { OrderedSet, List } = require("immutable");
+const path = require("path");
+
 // const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
   name: () => "serverRenderFeature",
-  files: paths => List(),
+  files: paths =>
+    List.of(
+      {
+        source: path.join(
+          __dirname,
+          "../../files/serverRenderFeature/index.js"
+        ),
+        target: path.join(paths.get("root"), "src/index.js")
+      },
+      {
+        source: path.join(
+          __dirname,
+          "../../files/serverRenderFeature/server.js"
+        ),
+        target: path.join(paths.get("root"), "src/server.js")
+      },
+      {
+        source: path.join(
+          __dirname,
+          "../../files/serverRenderFeature/template.js"
+        ),
+        target: path.join(paths.get("root"), "src/config/template.js")
+      }
+    ),
   plugins: () => OrderedSet.of(),
   loaders: () => OrderedSet.of(),
   overrideLoader: (loader, env, target, paths) => loader,

@@ -6,7 +6,7 @@ module.exports = {
   options: (env, target, paths) => {
     return fromJS({
       test: /font.*\.(woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      include: [paths.src, paths.modules],
+      include: [paths.get("src"), paths.get("modules")],
       use: [
         {
           loader: "url-loader",

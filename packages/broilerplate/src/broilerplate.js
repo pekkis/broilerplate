@@ -1,179 +1,226 @@
-const { OrderedSet, List } = require("immutable");
+const { List, OrderedSet, Map } = require("immutable");
 const {
-  configureLoader,
-  isLoaderEnabled,
-  configurePlugin,
-  getFeatures,
   getFeature,
-  isPluginEnabled,
-  buildPlugin,
-  buildLoader,
-  getPlugin,
+  getDefaultBaseConfig,
   getLoader,
-  baseConfig
+  getPlugin,
+  buildPlugin,
+  buildLoader
 } = require("./configure");
-
+const pipe = require("./pipe");
+const getDefaultPaths = require("./defaultPaths");
 const path = require("path");
 const fs = require("fs-extra");
 
-const createStyleLoader = require("./createStyleLoader");
-const defaultPaths = require("./defaultPaths");
+const initialize = build => {
+  return Map();
+};
 
-const broilerplate = paths => {
-  let _features = OrderedSet.of(
-    "babelFeature",
-    // "babelMinifyFeature",
-    "basicDevelopmentFeature",
-    "basicOptimizationFeature",
-    "clientRenderFeature",
-    "serverRenderFeature",
-    "codeSplittingFeature",
-    "pekkisHybridCssFeature",
-    "assetFeature",
-    "manifestFeature"
-  ).map(getFeature);
+const defaultBaseConfig = (env, target) => build => {
+  return build.set(
+    "base",
+    getDefaultBaseConfig(env, target, build.get("paths"))
+  );
+};
 
-  let _loaders = OrderedSet.of();
-  let _plugins = OrderedSet.of();
+const toJS = build => build.toJS();
 
-  let removedLoaders = OrderedSet.of();
-  let removedPlugins = OrderedSet.of();
+const run = build => {
+  const env = build.get("env");
+  const target = build.get("target");
+  const paths = build.get("paths");
+  const base = build.get("base");
+  const loaders = build.get("loaders");
+  const plugins = build.get("plugins");
 
-  const broilerplate = {
-    removePlugin: plugin => {
-      removedPlugins = removedPlugins.add(plugin);
-      return broilerplate;
-    },
+  return base
+    .setIn(
+      ["module", "rules"],
+      loaders.map(l => buildLoader(env, target, paths, l))
+    )
+    .set("plugins", plugins.map(p => buildPlugin(env, target, paths, p)));
+};
 
-    removeLoader: loader => {
-      removedLoaders = removedLoaders.add(loader);
-      return broilerplate;
-    },
+const compile = (env, target) => build => {
+  const features = build.get("features");
 
-    addFeature: feature => {
-      _features = _features.add(getFeature(feature));
-      return broilerplate;
-    },
+  const loaders = features
+    .reduce(
+      (loaders, f) => loaders.concat(f.loaders()),
+      build.get("loaders", OrderedSet())
+    )
+    .map(l => getLoader(l))
+    .filterNot(l =>
+      build.get("removedLoaders", OrderedSet()).includes(l.name())
+    )
+    .filter(l => l.isEnabled(env, target))
+    .map(l => features.reduce((l, f) => f.overrideLoader(l), l));
 
-    removeFeature: feature => {
-      _features = _features.filterNot(f => f === feature);
-      return broilerplate;
-    },
+  const plugins = features
+    .reduce(
+      (plugins, f) => plugins.concat(f.plugins()),
+      build.get("plugins", OrderedSet())
+    )
+    .map(p => getPlugin(p))
+    .filterNot(p =>
+      build.get("removedPlugins", OrderedSet()).includes(p.name())
+    )
+    .filter(p => p.isEnabled(env, target))
+    .map(p => features.reduce((p, f) => f.overridePlugin(p), p));
 
-    getFeatures: () => _features,
+  const base = features.reduce(
+    (c, f) =>
+      f.overrideWebpackConfiguration(c, env, target, build.get("paths")),
+    build.get("base")
+  );
 
-    init: (force = false) => {
-      const files = broilerplate.getFeatures().reduce(
-        (r, f) => r.concat(f.files(paths)),
-        List.of(
-          {
-            source: path.join(__dirname, "files/.browserslistrc"),
-            target: path.join(paths.root, ".browserslistrc")
-          },
-          {
-            source: path.join(__dirname, "files/overrides.js"),
-            target: path.join(paths.root, "src/config/overrides.js")
-          }
-        )
-      );
+  return build
+    .set("env", env)
+    .set("target", target)
+    .set("base", base)
+    .set("plugins", plugins)
+    .set("loaders", loaders);
+};
 
-      console.log("f", files.toJS());
+const override = overridesPath => build => {
+  const overrides = require(overridesPath);
 
-      files.forEach(f => {
-        const { source, target } = f;
-        fs.ensureDirSync(path.dirname(target));
+  const env = build.get("env");
+  const target = build.get("target");
+  const paths = build.get("paths");
+  const base = build.get("base");
+  const loaders = build.get("loaders", OrderedSet());
+  const plugins = build.get("plugins", OrderedSet());
 
-        console.log("tussihovi");
-        fs.copySync(source, target);
+  const {
+    overrideLoader,
+    overridePlugin,
+    overrideWebpackConfiguration
+  } = overrides;
 
-        console.log("tussihovi");
-      });
+  const overriddenLoaders = loaders.map(l =>
+    overrideLoader(l, env, target, paths)
+  );
+  const overriddenPlugins = plugins.map(p =>
+    overridePlugin(p, env, target, paths)
+  );
 
-      return broilerplate;
-    },
+  const overriddenBase = overrideWebpackConfiguration(base, env, target, paths);
 
-    build: (env, target) => {
-      const features = getFeatures(env, target, paths, _features);
+  return build
+    .set("plugins", overriddenPlugins)
+    .set("loaders", overriddenLoaders)
+    .set("base", overriddenBase);
+};
 
-      const loaders = features
-        .reduce((loaders, f) => loaders.concat(f.loaders()), _loaders)
-        .map(l => getLoader(l))
-        .filterNot(l => removedLoaders.includes(l.name()))
-        .map(l => features.reduce((l, f) => f.overrideLoader(l), l));
+const ensureFiles = (force = false) => build => {
+  const paths = build.get("paths");
+  const files = build.get("features").reduce(
+    (r, f) => r.concat(f.files(paths)),
+    List.of(
+      {
+        source: path.join(__dirname, "../files/.browserslistrc"),
+        target: path.join(paths.get("root"), ".browserslistrc")
+      },
+      {
+        source: path.join(__dirname, "../files/overrides.js"),
+        target: path.join(paths.get("root"), "./src/config/overrides.js")
+      },
+      {
+        source: path.join(__dirname, "../files/.env.example"),
+        target: path.join(paths.get("root"), ".env.example")
+      },
+      {
+        source: path.join(__dirname, "../files/.env.example"),
+        target: path.join(paths.get("root"), ".env")
+      },
+      {
+        source: path.join(__dirname, "../files/.gitignore"),
+        target: path.join(paths.get("root"), ".gitignore")
+      }
+    )
+  );
 
-      const plugins = features
-        .reduce((plugins, f) => plugins.concat(f.plugins()), _plugins)
-        .map(p => getPlugin(p))
-        .filterNot(p => removedPlugins.includes(p.name()))
-        .map(p => features.reduce((p, f) => f.overridePlugin(p), p));
+  files.forEach(f => {
+    const { source, target } = f;
+    fs.ensureDirSync(path.dirname(target));
 
-      const base = features.reduce(
-        (c, f) => f.overrideWebpackConfiguration(c, env, target, paths),
-        baseConfig(env, target, paths)
-      );
+    console.log("copying from ", source, "to", target);
 
-      return {
-        env,
-        target,
-        features,
-        loaders,
-        plugins,
-        base
-      };
-    },
+    fs.copySync(source, target, {
+      overwrite: force
+    });
+  });
 
-    override: (build, overrides) => {
-      const { env, target, features, loaders, plugins, base } = build;
+  return build.update("files", List(), f => f.concat(files));
+};
 
-      const {
-        overrideLoader,
-        overridePlugin,
-        overrideWebpackConfiguration
-      } = overrides;
+const defaultPaths = (env, target, dirname) => build => {
+  return build.set("paths", getDefaultPaths(env, target, dirname));
+};
 
-      const overriddenLoaders = loaders.map(l =>
-        overrideLoader(l, env, target, paths)
-      );
-      const overriddenPlugins = plugins.map(p =>
-        overridePlugin(p, env, target, paths)
-      );
+const mergePaths = extraPaths => build => {
+  return build.update("paths", paths => paths.merge(extraPaths));
+};
 
-      const overriddenBase = overrideWebpackConfiguration(
-        base,
-        env,
-        target,
-        paths
-      );
+const addFeature = feature => build => {
+  return build.update("features", features =>
+    features.add(getFeature(feature))
+  );
+};
 
-      return {
-        env,
-        target,
-        features,
-        plugins: overriddenPlugins,
-        loaders: overriddenLoaders,
-        base: overriddenBase
-      };
-    },
+const removeFeature = featureName => build => {
+  return build.update("features", features =>
+    features.filterNot(f => f.name() === featureName)
+  );
+};
 
-    run: build => {
-      const { plugins, base, loaders, env, target } = build;
+const removePlugins = (...plugins) => pipe(...plugins.map(removePlugin));
 
-      console.log(base, "beis");
+const removePlugin = plugin => build => {
+  return build.update("removedPlugins", OrderedSet(), rp => rp.add(plugin));
+};
 
-      return base
-        .setIn(
-          ["module", "rules"],
-          loaders.map(l => buildLoader(env, target, paths, l))
-        )
-        .set("plugins", plugins.map(p => buildPlugin(env, target, paths, p)));
-    }
-  };
+const removeLoaders = (...loaders) => pipe(...loaders.map(removeLoader));
 
-  return broilerplate;
+const removeLoader = loader => build => {
+  return build.update("removedLoaders", OrderedSet(), rl => rl.add(loader));
+};
+
+const defaultFeatures = build => {
+  return build.set(
+    "features",
+    OrderedSet.of(
+      "babelFeature",
+      "basicDevelopmentFeature",
+      "basicOptimizationFeature",
+      "clientRenderFeature",
+      "serverRenderFeature",
+      "codeSplittingFeature",
+      "pekkisHybridCssFeature",
+      "assetFeature",
+      "manifestFeature",
+      "uglifyMinifyFeature"
+    ).map(getFeature)
+  );
 };
 
 module.exports = {
-  broilerplate,
-  createStyleLoader,
-  defaultPaths
+  pipe,
+  ensureFiles,
+  defaultBaseConfig,
+  initialize,
+  defaultFeatures,
+  mergePaths,
+  defaultPaths,
+  addFeature,
+  removeFeature,
+  removeLoader,
+  removePlugin,
+  removeLoaders,
+  removePlugins,
+  override,
+  compile,
+  run,
+  toJS
 };

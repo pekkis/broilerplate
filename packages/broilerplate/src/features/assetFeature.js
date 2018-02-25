@@ -5,8 +5,8 @@ module.exports = {
   name: () => "assetFeature",
   files: paths =>
     List.of({
-      source: path.join(__dirname, "assetFeature"),
-      target: path.join(paths.root, "src/assets")
+      source: path.join(__dirname, "../../files/assetFeature"),
+      target: path.join(paths.get("root"), "src/assets")
     }),
   plugins: () => OrderedSet.of("copyFilesPlugin"),
   loaders: () => OrderedSet.of("imageLoader", "fontLoader"),

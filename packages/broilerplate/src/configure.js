@@ -75,16 +75,16 @@ const getFilename = (env, target) => {
   return "[name].[chunkhash].js";
 };
 
-const baseConfig = (env, target, paths) => {
+const getDefaultBaseConfig = (env, target, paths) => {
   let baseConfig = fromJS({
     devtool: env === "development" ? "#eval-source-map" : "source-map",
-    context: paths.src,
+    context: paths.get("src"),
     module: {
       rules: []
     },
     externals: [],
     resolve: {
-      modules: [paths.src, paths.modules],
+      modules: [paths.get("src"), paths.get("modules")],
       extensions: [".js", ".jsx"]
     },
     entry: {
@@ -92,7 +92,7 @@ const baseConfig = (env, target, paths) => {
     },
 
     output: {
-      path: paths.build,
+      path: paths.get("build"),
       publicPath: "/",
       filename: getFilename(env, target),
       devtoolModuleFilenameTemplate: "/[absolute-resource-path]"
@@ -115,7 +115,7 @@ module.exports = {
   getPlugin,
   getFeature,
   getLoader,
-  baseConfig,
+  getDefaultBaseConfig,
   buildLoader,
   buildPlugin
 };
