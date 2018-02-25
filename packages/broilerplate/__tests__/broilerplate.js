@@ -1,4 +1,13 @@
-const { broilerplate } = require("../src/broilerplate");
+const {
+  pipe,
+  empty,
+  defaultFeatures,
+  mergePaths,
+  defaultBaseConfig,
+  compile,
+  run
+} = require("../src/broilerplate");
+
 const path = require("path");
 
 const paths = {
@@ -9,60 +18,62 @@ const paths = {
   test: path.resolve(__dirname, "./test")
 };
 
-const overrides = {
-  overridePlugin: values => values,
-  overrideLoader: values => values,
-  overrideWebpackConfiguration: values => values
-};
-
 test("runs with defaults for production / client", () => {
-  const bp = broilerplate("production", "client", paths, overrides);
-  expect(typeof bp).toBe("object");
+  const env = "production";
+  const target = "client";
 
-  const config = bp.run();
-  expect(typeof config).toBe("object");
-});
-
-test("removes a plugin", () => {
-  const bp = broilerplate("production", "client", paths, overrides);
-  expect(typeof bp).toBe("object");
-
-  const { plugins } = bp.build();
-
-  const p = plugins.find(p => p.name() === "namedChunksPlugin");
-  expect(typeof p).toBe("object");
-
-  bp.removePlugin("namedChunksPlugin");
-
-  const { plugins: plugins2 } = bp.build();
-
-  const p2 = plugins2.find(p => p.name() === "namedChunksPlugin");
-  expect(typeof p2).toBe("undefined");
-
-  const config = bp.run();
-  console.log(config);
+  const build = pipe(
+    empty,
+    mergePaths(paths),
+    defaultFeatures,
+    defaultBaseConfig(env, target, paths),
+    compile(env, target),
+    run
+  )();
+  expect(typeof build).toBe("object");
 });
 
 test("runs with defaults for development / client", () => {
-  const bp = broilerplate("development", "client", paths, overrides);
-  expect(typeof bp).toBe("object");
+  const env = "development";
+  const target = "client";
 
-  const config = bp.run();
-  expect(typeof config).toBe("object");
+  const build = pipe(
+    empty,
+    mergePaths(paths),
+    defaultFeatures,
+    defaultBaseConfig(env, target, paths),
+    compile(env, target),
+    run
+  )();
+  expect(typeof build).toBe("object");
 });
 
 test("runs with defaults for development / server", () => {
-  const bp = broilerplate("development", "server", paths, overrides);
-  expect(typeof bp).toBe("object");
+  const env = "development";
+  const target = "server";
 
-  const config = bp.run();
-  expect(typeof config).toBe("object");
+  const build = pipe(
+    empty,
+    mergePaths(paths),
+    defaultFeatures,
+    defaultBaseConfig(env, target, paths),
+    compile(env, target),
+    run
+  )();
+  expect(typeof build).toBe("object");
 });
 
 test("runs with defaults for production / server", () => {
-  const bp = broilerplate("production", "server", paths, overrides);
-  expect(typeof bp).toBe("object");
+  const env = "productions";
+  const target = "server";
 
-  const config = bp.run();
-  expect(typeof config).toBe("object");
+  const build = pipe(
+    empty,
+    mergePaths(paths),
+    defaultFeatures,
+    defaultBaseConfig(env, target, paths),
+    compile(env, target),
+    run
+  )();
+  expect(typeof build).toBe("object");
 });

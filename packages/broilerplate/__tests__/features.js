@@ -20,8 +20,4 @@ test("internal features match", () => {
     expect(typeof feature).toBe("object");
     expect(feature.name()).toEqual(ip);
   });
-
-  // const bp = broilerplate("production", "client", paths, overrides);
-
-  // console.log(bp);
 });

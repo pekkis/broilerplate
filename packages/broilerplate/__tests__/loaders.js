@@ -1,7 +1,13 @@
 const { getLoader } = require("../src/configure");
 
-test("internal features match", () => {
-  const internalLoaders = [];
+test("internal loaders match", () => {
+  const internalLoaders = [
+    "babelLoader",
+    "externalcssLoader",
+    "fontLoader",
+    "imageLoader",
+    "postcssLoader"
+  ];
 
   internalLoaders.forEach(ip => {
     const loader = getLoader(ip);

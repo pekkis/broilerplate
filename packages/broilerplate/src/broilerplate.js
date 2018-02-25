@@ -13,8 +13,13 @@ const path = require("path");
 
 const copy = require("./copy");
 
-const initialize = build => {
-  return Map();
+const empty = build => {
+  return Map({
+    paths: Map(),
+    loaders: OrderedSet(),
+    features: OrderedSet(),
+    plugins: OrderedSet()
+  });
 };
 
 const defaultBaseConfig = (env, target) => build => {
@@ -155,7 +160,7 @@ const defaultPaths = (env, target, dirname) => build => {
 };
 
 const mergePaths = extraPaths => build => {
-  return build.update("paths", paths => paths.merge(extraPaths));
+  return build.update("paths", Map(), paths => paths.merge(extraPaths));
 };
 
 const addFeature = feature => build => {
@@ -204,7 +209,7 @@ module.exports = {
   pipe,
   ensureFiles,
   defaultBaseConfig,
-  initialize,
+  empty,
   defaultFeatures,
   mergePaths,
   defaultPaths,
