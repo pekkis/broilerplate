@@ -136,7 +136,7 @@ const ensureFiles = (force = false) => build => {
         target: path.join(paths.get("root"), ".env")
       },
       {
-        source: path.join(__dirname, "../files/.gitignore"),
+        source: path.join(__dirname, "../files/git_ignore"),
         target: path.join(paths.get("root"), ".gitignore")
       }
     )
