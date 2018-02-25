@@ -22,7 +22,7 @@
     "url": "https://github.com/pekkis/broilerplate.git"
   },
   "author": "pekkis",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "peerDependencies": {
     "babel-core": "6",
     "babel-loader": "^7.1.2",
