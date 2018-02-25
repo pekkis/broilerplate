@@ -10,7 +10,7 @@ const {
   override,
   run,
   toJS
-} = require("../src/broilerplate");
+} = require("@dr-kobros/broilerplate");
 
 const dotenv = require("dotenv");
 dotenv.config();
