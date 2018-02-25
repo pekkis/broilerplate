@@ -24,6 +24,7 @@
   "author": "pekkis",
   "license": "ISC",
   "peerDependencies": {
+    "babel-core": "6",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.3.0",
     "babel-plugin-styled-components": "^1.5.0",
