@@ -16,6 +16,10 @@ const files = List.of(
   {
     source: path.join(__dirname, "../files/webpack.config.babel.js"),
     target: path.join(rootDir, "webpack.config.babel.js")
+  },
+  {
+    source: path.join(__dirname, "../files/.babelrc"),
+    target: path.join(rootDir, ".babelrc")
   }
 );
 
