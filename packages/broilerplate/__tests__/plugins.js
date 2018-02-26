@@ -3,7 +3,6 @@ const { getPlugin } = require("../src/configure");
 
 test("internal plugins match", () => {
   const internalPlugins = [
-    "babelMinifyPlugin",
     "caseSensitivePathsPlugin",
     "cleanPlugin",
     "copyFilesPlugin",
@@ -12,15 +11,15 @@ test("internal plugins match", () => {
     "hashedModulesPlugin",
     "htmlPlugin",
     "manifestPlugin",
-    "metaBundlePlugin",
-    "moduleConcatenationPlugin",
-    "namedChunksPlugin",
-    "namedModulesPlugin",
-    "noEmitOnErrorsPlugin",
-    "occurrenceOrderPlugin",
+    // "metaBundlePlugin",
+    // "moduleConcatenationPlugin",
+    // "namedChunksPlugin",
+    // "namedModulesPlugin",
+    // "noEmitOnErrorsPlugin",
+    // "occurrenceOrderPlugin",
     "statsPlugin",
     "uglifyPlugin",
-    "vendorBundlePlugin",
+    // "vendorBundlePlugin",
     "watchMissingNodeModulesPlugin"
   ];
 

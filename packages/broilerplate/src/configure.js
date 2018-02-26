@@ -77,7 +77,9 @@ const getFilename = (env, target) => {
 
 const getDefaultBaseConfig = (env, target, paths) => {
   let baseConfig = fromJS({
-    devtool: env === "development" ? "#eval-source-map" : "source-map",
+    mode: env,
+
+    // devtool: env === "development" ? "#eval-source-map" : "source-map",
     context: paths.get("src"),
     module: {
       rules: []
@@ -97,6 +99,27 @@ const getDefaultBaseConfig = (env, target, paths) => {
       filename: getFilename(env, target),
       devtoolModuleFilenameTemplate: "/[absolute-resource-path]"
     },
+
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            chunks: "initial",
+            minChunks: 2,
+            maxInitialRequests: 5, // The default limit is too small to showcase the effect
+            minSize: 0 // This is example is too small to create commons chunks
+          },
+          vendor: {
+            test: /node_modules/,
+            chunks: "initial",
+            name: "vendor",
+            priority: 10,
+            enforce: true
+          }
+        }
+      }
+    },
+
     plugins: []
   });
 

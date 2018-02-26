@@ -4,11 +4,9 @@ test("internal features match", () => {
   const internalFeatures = [
     "assetFeature",
     "babelFeature",
-    "babelMinifyFeature",
     "basicDevelopmentFeature",
     "basicOptimizationFeature",
     "clientRenderFeature",
-    "codeSplittingFeature",
     "manifestFeature",
     "pekkisHybridCssFeature",
     "serverRenderFeature",

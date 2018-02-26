@@ -193,14 +193,14 @@ const defaultFeatures = build => {
     OrderedSet.of(
       "babelFeature",
       "basicDevelopmentFeature",
-      "basicOptimizationFeature",
+      // "basicOptimizationFeature",
       "clientRenderFeature",
       "serverRenderFeature",
-      "codeSplittingFeature",
+      // "codeSplittingFeature",
       "pekkisHybridCssFeature",
       "assetFeature",
-      "manifestFeature",
-      "uglifyMinifyFeature"
+      "manifestFeature"
+      // "uglifyMinifyFeature"
     ).map(getFeature)
   );
 };

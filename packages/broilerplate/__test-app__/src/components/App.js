@@ -22,7 +22,7 @@ class App extends React.PureComponent {
       <div>
         <h1>
           <img src={trollo} />
-          Fraktio Tussimestari ERP 2.0
+          Fraktio Tussimestari ERP 3333.0
         </h1>
 
         {loading > 0 && <Loading />}
