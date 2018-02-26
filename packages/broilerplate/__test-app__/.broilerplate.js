@@ -3,6 +3,7 @@ const util = require("util");
 
 const {
   pipe,
+  empty,
   ensureFiles,
   defaultFeatures,
   mergePaths,
@@ -14,6 +15,7 @@ const {
   run,
   toJS
 } = require("../src/broilerplate");
+const nodeExternals = require("../src/pipeline/nodeExternals");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -24,6 +26,7 @@ module.exports = target => {
   const env = process.env.NODE_ENV;
 
   const config = pipe(
+    empty,
     defaultPaths(env, target, __dirname),
     mergePaths(
       Map({
@@ -34,6 +37,9 @@ module.exports = target => {
     defaultFeatures,
     ensureFiles(false),
     compile(env, target),
+    nodeExternals({
+      whitelist: [/^font-awesome/, /^react-fa/]
+    }),
     override(path.join(__dirname, "./src/config/overrides")),
     run,
     toJS

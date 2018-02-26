@@ -100,8 +100,15 @@ const getDefaultBaseConfig = (env, target, paths) => {
       devtoolModuleFilenameTemplate: "/[absolute-resource-path]"
     },
 
-    optimization: {
-      splitChunks: {
+    optimization: {},
+
+    plugins: []
+  });
+
+  if (target !== "server") {
+    return baseConfig.setIn(
+      ["optimization", "splitChunks"],
+      fromJS({
         cacheGroups: {
           commons: {
             chunks: "initial",
@@ -117,17 +124,12 @@ const getDefaultBaseConfig = (env, target, paths) => {
             enforce: true
           }
         }
-      }
-    },
-
-    plugins: []
-  });
-
-  if (target !== "server") {
-    return baseConfig;
+      })
+    );
   }
 
   return baseConfig
+    .setIn(["optimization", "minimize"], false)
     .set("target", "node")
     .setIn(["output", "library"], "app")
     .setIn(["output", "libraryTarget"], "commonjs2");

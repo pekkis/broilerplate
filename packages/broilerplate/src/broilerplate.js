@@ -13,8 +13,11 @@ const path = require("path");
 
 const copy = require("./copy");
 
+const { STATUS_UNCOMPILED, STATUS_COMPILED } = require("./buildStatuses");
+
 const empty = build => {
   return Map({
+    status: STATUS_UNCOMPILED,
     paths: Map(),
     loaders: OrderedSet(),
     features: OrderedSet(),
@@ -85,7 +88,8 @@ const compile = (env, target) => build => {
     .set("target", target)
     .set("base", base)
     .set("plugins", plugins)
-    .set("loaders", loaders);
+    .set("loaders", loaders)
+    .set("status", STATUS_COMPILED);
 };
 
 const override = overridesPath => build => {

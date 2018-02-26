@@ -20,13 +20,16 @@ const fileMapper = (chunks, assetsByChunkName, mapper, extension) => {
     .map(chunk => assetsByChunkName[chunk])
     .map(chunk => (isArray(chunk) ? chunk : [chunk]))
     .map(files =>
-      files.filter(file => file.endsWith(extension)).map(mapper).join("")
+      files
+        .filter(file => file.endsWith(extension))
+        .map(mapper)
+        .join("")
     )
     .join("");
 };
 
 const respond = stats => {
-  const chunks = ["meta", "vendor", "client"];
+  const chunks = ["vendor", "client"];
 
   const scripts = fileMapper(
     chunks,
@@ -67,7 +70,7 @@ const respond = stats => {
 
     const sheet = new ServerStyleSheet();
     const html = ReactDOMServer.renderToString(
-      sheet.collectStyles(<Root store={store} />)
+      sheet.collectStyles(<Root store={store} context={context} />)
     );
 
     const sheets = sheet.getStyleTags();
