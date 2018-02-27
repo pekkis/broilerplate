@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "bin": {
@@ -9,19 +9,13 @@
   "scripts": {
     "build": "NODE_ENV=production babel src -d lib",
     "prepublish": "npm run build",
-    "build:client":
-      "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
-    "build:empty":
-      "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
-    "build:server":
-      "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
-    "build:node":
-      "cross-env NODE_ENV=production babel __test-app__/src/index.js > __test-app__/dist-server/index.js",
+    "build:client": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
+    "build:empty": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
+    "build:node": "cross-env NODE_ENV=production babel __test-app__/src/index.js > __test-app__/dist-server/index.js",
     "test": "jest",
-    "start:test":
-      "cross-env NODE_ENV=development webpack-dev-server --config __test-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress",
-    "start:empty":
-      "cross-env NODE_ENV=development webpack-dev-server --config __empty-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress"
+    "start:test": "cross-env NODE_ENV=development webpack-dev-server --config __test-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress",
+    "start:empty": "cross-env NODE_ENV=development webpack-dev-server --config __empty-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress"
   },
   "repository": {
     "type": "git",
