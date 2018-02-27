@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./App.pcss";
 import trollo from "../assets/trollo.png";
 import Loading from "./Loading";
 import { Switch, Route } from "react-router";

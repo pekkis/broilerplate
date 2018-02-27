@@ -1,6 +1,4 @@
 import React from "react";
-import styles from "./Person.pcss";
-import cx from "classnames";
 import Button from "./Button";
 import { pure } from "recompose";
 import { Link } from "react-router-dom";
@@ -8,13 +6,8 @@ import { Link } from "react-router-dom";
 const Person = props => {
   const { person, deletePerson } = props;
 
-  const classes = cx(styles.root, {
-    [styles.male]: person.gender === 'm',
-    [styles.female]: person.gender === 'f',
-  });
-
   return (
-    <div className={classes}>
+    <div>
       <div>
         <Link to={`/person/${person.id}`}>
           <strong>{person.lastName}</strong>, {person.firstName}
@@ -26,11 +19,14 @@ const Person = props => {
       </div>
 
       <div>
-        <Button onClick={() => { deletePerson(person.id); }}>
+        <Button
+          onClick={() => {
+            deletePerson(person.id);
+          }}
+        >
           FIRE ME
         </Button>
       </div>
-
     </div>
   );
 };
