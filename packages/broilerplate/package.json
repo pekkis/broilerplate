@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.12.4",
+  "version": "0.13.0",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "bin": {
@@ -9,19 +9,13 @@
   "scripts": {
     "build": "NODE_ENV=production babel src -d lib",
     "prepublish": "npm run build",
-    "build:client":
-      "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
-    "build:empty":
-      "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
-    "build:server":
-      "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
-    "build:node":
-      "cross-env NODE_ENV=production babel __test-app__/src/index.js > __test-app__/dist-server/index.js",
+    "build:client": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
+    "build:empty": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
+    "build:node": "cross-env NODE_ENV=production babel __test-app__/src/index.js > __test-app__/dist-server/index.js",
     "test": "jest",
-    "start:test":
-      "cross-env NODE_ENV=development webpack-dev-server --config __test-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress",
-    "start:empty":
-      "cross-env NODE_ENV=development webpack-dev-server --config __empty-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress"
+    "start:test": "cross-env NODE_ENV=development webpack-dev-server --config __test-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress",
+    "start:empty": "cross-env NODE_ENV=development webpack-dev-server --config __empty-app__/webpack.config.babel.js --port 9999 --history-api-fallback --hot --inline --disable-host-check --progress"
   },
   "repository": {
     "type": "git",
@@ -32,13 +26,13 @@
   "peerDependencies": {
     "babel-core": "6",
     "babel-loader": "^7.1.3",
-    "babel-preset-env": "^1.6.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "cross-env": "^5.1.3",
     "dotenv": "^5.0.0",
     "react": "^16.2.0",
@@ -49,13 +43,13 @@
   },
   "devDependencies": {
     "ajv": "^5.0.0",
+    "autoprefixer": "^8.0.0",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-core": "6",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^22.2.2",
     "babel-loader": "^7.1.3",
-    "babel-preset-env": "^1.6.1",
     "babel-plugin-styled-components": "^1.5.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -63,6 +57,7 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "classnames": "^2.2.5",
     "cross-env": "^5.1.3",
     "dotenv": "^5.0.0",
@@ -75,9 +70,8 @@
     "express": "^4.16.2",
     "jest": "^22.3.0",
     "normalize.css": "^8.0.0",
-    "autoprefixer": "^8.0.0",
-    "postcss-preset-env": "^2.1.0",
     "postcss-loader": "^2.1.1",
+    "postcss-preset-env": "^2.1.0",
     "random-js": "^1.0.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
