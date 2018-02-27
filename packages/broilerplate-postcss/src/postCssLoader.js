@@ -1,12 +1,12 @@
 const { fromJS } = require("immutable");
-const createStyleLoader = require("../createStyleLoader");
+const createStyleLoader = require("@dr-kobros/broilerplate/lib/createStyleLoader");
 
 const getLoader = target => {
   return target === "client" ? "css-loader" : "css-loader/locals";
 };
 
 module.exports = {
-  name: () => "postcssLoader",
+  name: () => "postCssLoader",
   isEnabled: (env, target) => true,
 
   post: (env, target, options) => {
@@ -15,7 +15,8 @@ module.exports = {
 
   options: (env, target, paths) => {
     return fromJS({
-      test: /\.pcss$/,
+      include: [paths.get("src")],
+      test: /\.p?css$/,
       use: [
         {
           loader: getLoader(target),

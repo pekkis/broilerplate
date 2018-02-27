@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const { getFeature } = require("../src/configure");
 
 test("internal features match", () => {
@@ -8,9 +12,8 @@ test("internal features match", () => {
     "basicOptimizationFeature",
     "clientRenderFeature",
     "manifestFeature",
-    "pekkisHybridCssFeature",
-    "serverRenderFeature",
-    "uglifyMinifyFeature"
+    "externalCssFeature",
+    "serverRenderFeature"
   ];
 
   internalFeatures.forEach(ip => {

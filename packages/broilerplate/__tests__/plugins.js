@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const path = require("path");
 const { getPlugin } = require("../src/configure");
 
@@ -18,7 +22,6 @@ test("internal plugins match", () => {
     // "noEmitOnErrorsPlugin",
     // "occurrenceOrderPlugin",
     "statsPlugin",
-    "uglifyPlugin",
     // "vendorBundlePlugin",
     "watchMissingNodeModulesPlugin"
   ];

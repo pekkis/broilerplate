@@ -201,7 +201,6 @@ const defaultFeatures = build => {
       "clientRenderFeature",
       "serverRenderFeature",
       // "codeSplittingFeature",
-      "pekkisHybridCssFeature",
       "assetFeature",
       "manifestFeature"
       // "uglifyMinifyFeature"

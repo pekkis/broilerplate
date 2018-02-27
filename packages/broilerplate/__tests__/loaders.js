@@ -1,12 +1,15 @@
+/**
+ * @jest-environment node
+ */
+
 const { getLoader } = require("../src/configure");
 
 test("internal loaders match", () => {
   const internalLoaders = [
     "babelLoader",
-    "externalcssLoader",
+    "externalCssLoader",
     "fontLoader",
-    "imageLoader",
-    "postcssLoader"
+    "imageLoader"
   ];
 
   internalLoaders.forEach(ip => {

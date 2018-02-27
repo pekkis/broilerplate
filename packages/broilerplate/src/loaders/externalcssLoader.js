@@ -6,7 +6,7 @@ const getLoader = target => {
 };
 
 module.exports = {
-  name: () => "externalcssLoader",
+  name: () => "externalCssLoader",
   isEnabled: (env, target) => true,
 
   post: (env, target, options) => {

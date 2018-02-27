@@ -1,10 +1,10 @@
 const { OrderedSet, List } = require("immutable");
 
 module.exports = {
-  name: () => "uglifyMinifyFeature",
+  name: () => "externalCssFeature",
   files: paths => List(),
-  plugins: () => OrderedSet.of("uglifyPlugin"),
-  loaders: () => OrderedSet.of(),
+  plugins: () => OrderedSet.of("cssExtractPlugin"),
+  loaders: () => OrderedSet.of("externalcssLoader"),
   overrideLoader: (loader, env, target, paths) => loader,
   overridePlugin: (plugin, env, target, paths) => plugin,
   overrideWebpackConfiguration: (values, env, target, paths) => values
