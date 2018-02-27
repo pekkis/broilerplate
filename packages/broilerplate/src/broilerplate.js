@@ -167,11 +167,15 @@ const mergePaths = extraPaths => build => {
   return build.update("paths", Map(), paths => paths.merge(extraPaths));
 };
 
+const addFeatures = (...features) => pipe(...features.map(addFeature));
+
 const addFeature = feature => build => {
   return build.update("features", features =>
     features.add(getFeature(feature))
   );
 };
+
+const removeFeatures = (...features) => pipe(...features.map(removeFeature));
 
 const removeFeature = featureName => build => {
   return build.update("features", features =>
@@ -217,6 +221,8 @@ module.exports = {
   mergePaths,
   defaultPaths,
   addFeature,
+  addFeatures,
+  removeFeatures,
   removeFeature,
   removeLoader,
   removePlugin,
