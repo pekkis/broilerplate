@@ -13,7 +13,7 @@ module.exports = {
     OrderedSet.of({
       name: () => "serviceWorkerPlugin",
       isEnabled: (env, target) => target === "client",
-      defaults: (env, target, paths) =>
+      options: (env, target, paths) =>
         List.of(
           Map({
             entry: "sw.js"
