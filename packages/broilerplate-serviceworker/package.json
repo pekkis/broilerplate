@@ -34,7 +34,7 @@
     "@dr-kobros/broilerplate": ">= 0.12.0"
   },
   "dependencies": {
-    "@dr-kobros/serviceworker-webpack-plugin": "^0.1.0",
+    "@dr-kobros/serviceworker-webpack-plugin": "^0.1.1",
     "immutable": "4.0.0-rc.9"
   },
   "publishConfig": {
