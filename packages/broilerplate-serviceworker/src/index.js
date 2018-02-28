@@ -1,6 +1,7 @@
 const { OrderedSet, List } = require("immutable");
 const path = require("path");
-const ServiceWorkerWebpackPlugin = require("@dr-kobros/serviceworker-webpack-plugin");
+const ServiceWorkerWebpackPlugin = require("@dr-kobros/serviceworker-webpack-plugin")
+  .default;
 
 module.exports = {
   name: () => "serviceWorkerFeature",
