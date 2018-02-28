@@ -1,4 +1,4 @@
-const { OrderedSet, List } = require("immutable");
+const { OrderedSet, List, Map } = require("immutable");
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require("@dr-kobros/serviceworker-webpack-plugin");
 
