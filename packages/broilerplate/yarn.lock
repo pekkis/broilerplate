@@ -3220,7 +3220,7 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-text-webpack-plugin@^4.0.0-alpha.0:
+extract-text-webpack-plugin@^4.0.0-beta.0:
   version "4.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-4.0.0-beta.0.tgz#f7361d7ff430b42961f8d1321ba8c1757b5d4c42"
   dependencies:
@@ -9678,7 +9678,6 @@ webpack-manifest-plugin@andriijas/webpack-manifest-plugin:
     fs-extra "^0.30.0"
     lodash ">=3.5 <5"
     mutexify "1.0.1"
-    tapable "^1.0.0"
 
 webpack-node-externals@^1.6.0:
   version "1.6.0"
