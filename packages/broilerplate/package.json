@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production babel src -d lib",
-    "prepublish": "npm run build",
+    "prepublish": "npm run test && npm run build",
     "build:client": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
     "build:empty": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
     "build:server": "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
@@ -99,7 +99,7 @@
     "copy-webpack-plugin": "^4.4.1",
     "css-loader": "^0.28.10",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
-    "file-loader": "^1.1.6",
+    "file-loader": "^1.1.10",
     "fs-extra": "^5.0.0",
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "img-loader": "^2.0.0",

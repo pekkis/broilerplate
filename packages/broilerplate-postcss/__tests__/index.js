@@ -8,7 +8,8 @@ const {
   empty,
   defaultBaseConfig,
   addFeature,
-  compile
+  compile,
+  run
 } = require("@dr-kobros/broilerplate");
 
 const feature = require("../src/index");
@@ -25,10 +26,10 @@ test("builds", () => {
     compile(env, target)
   )();
 
-  console.log(build);
-
   expect(typeof build).toBe("object");
-
   expect(build.get("features").count()).toEqual(1);
   expect(build.get("loaders").count()).toEqual(1);
+
+  const ran = run(build);
+  expect(typeof ran).toBe("object");
 });

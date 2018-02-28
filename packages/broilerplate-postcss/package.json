@@ -27,7 +27,8 @@
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
-    "jest": "^22.4.2"
+    "jest": "^22.4.2",
+    "webpack": "4"
   },
   "peerDependencies": {
     "@dr-kobros/broilerplate": ">= 0.12.0",

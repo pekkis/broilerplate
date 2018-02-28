@@ -13,11 +13,9 @@ const {
   run
 } = require("@dr-kobros/broilerplate");
 
-const util = require("util");
-
 const feature = require("../src/index");
 
-test("compiles", () => {
+test("builds", () => {
   const env = "production";
   const target = "client";
 
@@ -25,27 +23,12 @@ test("compiles", () => {
     empty,
     defaultPaths(env, target, __dirname),
     defaultBaseConfig(env, target),
-    defaultFeatures,
     addFeature(feature),
     compile(env, target)
   )();
 
   expect(typeof build).toBe("object");
-});
 
-test("runs", () => {
-  const env = "production";
-  const target = "client";
-
-  const build = pipe(
-    empty,
-    defaultPaths(env, target, __dirname),
-    defaultBaseConfig(env, target),
-    defaultFeatures,
-    addFeature(feature),
-    compile(env, target),
-    run
-  )();
-
-  expect(typeof build).toBe("object");
+  const ran = run(build);
+  expect(typeof ran).toBe("object");
 });
