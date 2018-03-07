@@ -11,9 +11,9 @@ module.exports = {
 
     return {
       ...loader,
-      options: (env, target, paths) =>
+      options: (env, target, paths, options) =>
         loader
-          .options(env, target, paths)
+          .options(env, target, paths, options)
           .updateIn(["use", 0, "options", "plugins"], p =>
             p.push([
               "babel-plugin-styled-components",
