@@ -1,8 +1,10 @@
 const { OrderedSet, List, Map } = require("immutable");
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require("@dr-kobros/serviceworker-webpack-plugin");
+const baseFeature = require("@dr-kobros/broilerplate/lib/baseFeature");
 
 module.exports = {
+  ...baseFeature,
   name: () => "serviceWorkerFeature",
   files: paths =>
     List.of({
@@ -20,9 +22,5 @@ module.exports = {
           })
         ),
       plugin: options => new ServiceWorkerWebpackPlugin(...options)
-    }),
-  loaders: () => OrderedSet.of(),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths) => values
+    })
 };

@@ -1,10 +1,9 @@
-const { OrderedSet, List } = require("immutable");
+const { List } = require("immutable");
+const baseFeature = require("@dr-kobros/broilerplate/lib/baseFeature");
 
 module.exports = {
+  ...baseFeature,
   name: () => "styledComponentsFeature",
-  files: paths => List(),
-  plugins: () => OrderedSet.of(),
-  loaders: () => OrderedSet.of(),
   overrideLoader: (loader, env, target, paths) => {
     if (loader.name() !== "babelLoader") {
       return loader;
@@ -24,7 +23,5 @@ module.exports = {
             ])
           )
     };
-  },
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths) => values
+  }
 };
