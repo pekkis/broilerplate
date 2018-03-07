@@ -12,5 +12,5 @@ module.exports = {
   loaders: () => OrderedSet.of("imageLoader", "fontLoader"),
   overrideLoader: (loader, env, target, paths) => loader,
   overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths) => values
+  overrideBase: (values, env, target, paths) => values
 };

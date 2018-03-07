@@ -6,7 +6,10 @@ const getBrowsers = root => {
   const browserFile = fs.readFileSync(path.resolve(root, ".browserslistrc"), {
     encoding: "utf-8"
   });
-  return browserFile.split("\n").map(b => b.trim()).filter(b => b);
+  return browserFile
+    .split("\n")
+    .map(b => b.trim())
+    .filter(b => b);
 };
 
 const getTargets = (env, target, paths) => {
@@ -24,7 +27,7 @@ const getTargets = (env, target, paths) => {
 module.exports = {
   name: () => "babelLoader",
   isEnabled: (env, target) => true,
-  options: (env, target, paths) => {
+  options: (env, target, paths, options) => {
     return fromJS({
       test: /\.jsx?$/,
       use: [
@@ -36,8 +39,8 @@ module.exports = {
               [
                 "env",
                 {
-                  debug: false, // env === "development",
-                  useBuiltIns: "entry",
+                  debug: options.get("debug", false),
+                  useBuiltIns: true,
                   targets: getTargets(env, target, paths),
                   modules: false
                 }

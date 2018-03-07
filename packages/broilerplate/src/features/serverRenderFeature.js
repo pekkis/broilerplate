@@ -33,7 +33,7 @@ module.exports = {
   loaders: () => OrderedSet.of(),
   overrideLoader: (loader, env, target, paths) => loader,
   overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths, key) => {
+  overrideBase: (values, env, target, paths, key) => {
     return values;
     // TODO: why dis not work with font-awesome (dep of dep, maybe)
     /*

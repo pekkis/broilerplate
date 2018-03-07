@@ -53,14 +53,14 @@ const getPlugin = (...specs) => {
   };
 };
 
-const buildLoader = (env, target, paths, loader) => {
-  return loader.post
-    ? loader.post(env, target, loader.options(env, target, paths))
-    : loader.options(env, target, paths);
+const buildLoader = (env, target, paths, options, loader) => {
+  const opts = loader.options(env, target, paths, options);
+  return loader.post ? loader.post(env, target, opts) : opts;
 };
 
-const buildPlugin = (env, target, paths, plugin) => {
-  return plugin.plugin(plugin.options(env, target, paths).toJS());
+const buildPlugin = (env, target, paths, options, plugin) => {
+  const opts = plugin.options(env, target, paths, options).toJS();
+  return plugin.plugin(opts);
 };
 
 const getEntry = (env, target) => {

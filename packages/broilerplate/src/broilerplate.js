@@ -19,6 +19,9 @@ const empty = build => {
   return Map({
     status: STATUS_UNCOMPILED,
     paths: Map(),
+    options: Map({
+      debug: false
+    }),
     loaders: OrderedSet(),
     features: OrderedSet(),
     plugins: OrderedSet()
@@ -38,6 +41,7 @@ const run = build => {
   const env = build.get("env");
   const target = build.get("target");
   const paths = build.get("paths");
+  const options = build.get("options", Map());
   const base = build.get("base");
   const loaders = build.get("loaders");
   const plugins = build.get("plugins");
@@ -45,9 +49,12 @@ const run = build => {
   return base
     .setIn(
       ["module", "rules"],
-      loaders.map(l => buildLoader(env, target, paths, l))
+      loaders.map(l => buildLoader(env, target, paths, options, l))
     )
-    .set("plugins", plugins.map(p => buildPlugin(env, target, paths, p)));
+    .set(
+      "plugins",
+      plugins.map(p => buildPlugin(env, target, paths, options, p))
+    );
 };
 
 const compile = (env, target) => build => {
@@ -78,8 +85,7 @@ const compile = (env, target) => build => {
     .map(p => features.reduce((p, f) => f.overridePlugin(p), p));
 
   const base = features.reduce(
-    (c, f) =>
-      f.overrideWebpackConfiguration(c, env, target, build.get("paths")),
+    (c, f) => f.overrideBase(c, env, target, build.get("paths")),
     build.get("base")
   );
 
@@ -102,11 +108,7 @@ const override = overridesPath => build => {
   const loaders = build.get("loaders", OrderedSet());
   const plugins = build.get("plugins", OrderedSet());
 
-  const {
-    overrideLoader,
-    overridePlugin,
-    overrideWebpackConfiguration
-  } = overrides;
+  const { overrideLoader, overridePlugin, overrideBase } = overrides;
 
   const overriddenLoaders = loaders.map(l =>
     overrideLoader(l, env, target, paths)
@@ -115,7 +117,7 @@ const override = overridesPath => build => {
     overridePlugin(p, env, target, paths)
   );
 
-  const overriddenBase = overrideWebpackConfiguration(base, env, target, paths);
+  const overriddenBase = overrideBase(base, env, target, paths);
 
   return build
     .set("plugins", overriddenPlugins)
@@ -165,6 +167,10 @@ const defaultPaths = (env, target, dirname) => build => {
 
 const mergePaths = extraPaths => build => {
   return build.update("paths", Map(), paths => paths.merge(extraPaths));
+};
+
+const mergeOptions = extraOptions => build => {
+  return build.update("options", Map(), options => options.merge(extraOptions));
 };
 
 const addFeatures = (...features) => pipe(...features.map(addFeature));
@@ -220,6 +226,7 @@ module.exports = {
   empty,
   defaultFeatures,
   mergePaths,
+  mergeOptions,
   defaultPaths,
   addFeature,
   addFeatures,

@@ -7,5 +7,5 @@ module.exports = {
   loaders: () => OrderedSet.of("externalcssLoader"),
   overrideLoader: (loader, env, target, paths) => loader,
   overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths) => values
+  overrideBase: (values, env, target, paths) => values
 };

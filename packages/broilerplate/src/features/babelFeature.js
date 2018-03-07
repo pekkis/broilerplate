@@ -1,11 +1,8 @@
-const { OrderedSet, List } = require("immutable");
+const baseFeature = require("../baseFeature");
+const { OrderedSet } = require("immutable");
 
 module.exports = {
+  ...baseFeature,
   name: () => "babelFeature",
-  files: paths => List(),
-  plugins: () => OrderedSet(),
-  loaders: () => OrderedSet.of("babelLoader"),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideWebpackConfiguration: (values, env, target, paths) => values
+  loaders: () => OrderedSet.of("babelLoader")
 };

@@ -1,12 +1,14 @@
 const path = require("path");
-const util = require("util");
+// const util = require("util");
 
 const {
   pipe,
   empty,
   ensureFiles,
   defaultFeatures,
+  addFeatures,
   mergePaths,
+  mergeOptions,
   defaultPaths,
   removeFeature,
   defaultBaseConfig,
@@ -28,6 +30,11 @@ module.exports = target => {
   const config = pipe(
     empty,
     defaultPaths(env, target, __dirname),
+    mergeOptions(
+      Map({
+        debug: false
+      })
+    ),
     mergePaths(
       Map({
         modules: path.resolve(__dirname, "../node_modules")
@@ -35,6 +42,7 @@ module.exports = target => {
     ),
     defaultBaseConfig(env, target),
     defaultFeatures,
+    addFeatures("babelPolyfillFeature"),
     ensureFiles(false),
     compile(env, target),
     nodeExternals({
@@ -45,7 +53,7 @@ module.exports = target => {
     toJS
   )(Map());
 
-  console.log("config", util.inspect(config, { depth: 666 }));
+  // console.log("config", util.inspect(config, { depth: 666 }));
   // process.exit();
 
   return config;
