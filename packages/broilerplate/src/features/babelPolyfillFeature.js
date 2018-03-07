@@ -4,7 +4,7 @@ module.exports = {
   ...baseFeature,
   name: () => "babelPolyfillFeature",
   overrideBase: (values, env, target, paths) => {
-    if (target === "server" || env === "development") {
+    if (target === "server") {
       return values;
     }
 
