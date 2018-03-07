@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate-styled-components",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "description": "Styled Components for Broilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "pekkis",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@dr-kobros/broilerplate": "^0.14.2",
+    "@dr-kobros/broilerplate": "^0.14.3",
     "babel-cli": "^6.26.0",
     "babel-core": "6",
     "babel-eslint": "^7.2.3",
