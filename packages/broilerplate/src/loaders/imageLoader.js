@@ -1,6 +1,7 @@
-const { fromJS } = require("immutable");
+const { fromJS, OrderedSet } = require("immutable");
 
 module.exports = {
+  supportedFeatures: () => OrderedSet.of(),
   name: () => "imageLoader",
   isEnabled: (env, target) => true,
   options: (env, target, paths) => {

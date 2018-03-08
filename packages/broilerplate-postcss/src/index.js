@@ -11,6 +11,6 @@ module.exports = {
       source: path.join(__dirname, "../files/postcss.config.js"),
       target: path.join(paths.get("root"), "postcss.config.js")
     }),
-  plugins: () => OrderedSet.of("cssExtractPlugin"),
+  plugins: () => OrderedSet(),
   loaders: () => OrderedSet.of(postCssLoader)
 };

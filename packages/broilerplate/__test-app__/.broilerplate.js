@@ -1,5 +1,5 @@
 const path = require("path");
-// const util = require("util");
+const util = require("util");
 
 const {
   pipe,
@@ -17,7 +17,8 @@ const {
   run,
   toJS
 } = require("../src/broilerplate");
-const nodeExternals = require("../src/pipeline/nodeExternals");
+const nodeExternals = require("../src/features/nodeExternalsFeature");
+const extractCss = require("../src/features/extractCssFeature");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -42,18 +43,21 @@ module.exports = target => {
     ),
     defaultBaseConfig(env, target),
     defaultFeatures,
-    addFeatures("babelPolyfillFeature"),
+    addFeatures(
+      extractCss,
+      "babelPolyfillFeature",
+      nodeExternals({
+        whitelist: [/^font-awesome/, /^react-fa/]
+      })
+    ),
     ensureFiles(false),
     compile(env, target),
-    nodeExternals({
-      whitelist: [/^font-awesome/, /^react-fa/]
-    }),
     override(path.join(__dirname, "./src/config/overrides")),
     run,
     toJS
   )(Map());
 
-  // console.log("config", util.inspect(config, { depth: 666 }));
+  console.log("config", util.inspect(config, { depth: 666 }));
   // process.exit();
 
   return config;
