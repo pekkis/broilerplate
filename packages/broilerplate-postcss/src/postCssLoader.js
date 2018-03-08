@@ -1,7 +1,24 @@
-const { fromJS, OrderedSet } = require("immutable");
+const { fromJS, OrderedSet, List } = require("immutable");
 
 const getLoader = target => {
   return target === "client" ? "css-loader" : "css-loader/locals";
+};
+
+const getLoaders = target => {
+  let loaders = List.of(
+    {
+      loader: getLoader(target),
+      options: {
+        modules: true,
+        importLoaders: 2,
+        localIdentName: "[name]__[local]__[hash:base64:5]"
+      }
+    },
+    {
+      loader: "postcss-loader"
+    }
+  );
+  return target === "server" ? loaders : loaders.unshift("style-loader");
 };
 
 module.exports = {
@@ -12,20 +29,7 @@ module.exports = {
     return fromJS({
       include: [paths.get("src")],
       test: /\.p?css$/,
-      use: [
-        "style-loader",
-        {
-          loader: getLoader(target),
-          options: {
-            modules: true,
-            importLoaders: 2,
-            localIdentName: "[name]__[local]__[hash:base64:5]"
-          }
-        },
-        {
-          loader: "postcss-loader"
-        }
-      ]
+      use: getLoaders(target)
     });
   }
 };
