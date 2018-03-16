@@ -31,7 +31,7 @@
     "webpack": "4"
   },
   "peerDependencies": {
-    "@dr-kobros/broilerplate": ">= 0.12.0"
+    "@dr-kobros/broilerplate": ">= 0.15.0"
   },
   "dependencies": {
     "@dr-kobros/serviceworker-webpack-plugin": "^0.1.1",
