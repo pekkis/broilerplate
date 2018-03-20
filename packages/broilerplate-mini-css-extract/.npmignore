@@ -3,4 +3,5 @@ src/
 .eslintrc
 .gitignore
 yarn.lock
+__tests__/
 .git/

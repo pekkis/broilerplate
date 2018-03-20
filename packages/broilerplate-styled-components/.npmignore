@@ -4,3 +4,4 @@ src/
 .gitignore
 yarn.lock
 .git/
+__tests__/

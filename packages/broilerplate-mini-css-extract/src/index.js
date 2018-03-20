@@ -8,8 +8,8 @@ const plugin = {
   options: (env, target, paths) =>
     List.of(
       Map({
-        filename: "[name].css",
-        chunkFilename: "[id].css"
+        filename: "[name].[chunkhash].css",
+        chunkFilename: "[id].[chunkhash].css"
       })
     ),
   plugin: options => new Plugin(...options)
