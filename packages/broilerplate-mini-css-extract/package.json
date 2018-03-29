@@ -21,21 +21,21 @@
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.1.1",
+    "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
-    "jest": "^22.4.2",
-    "webpack": "4.1.1"
+    "jest": "^22.4.3",
+    "webpack": "4.3.0"
   },
   "peerDependencies": {
     "@dr-kobros/broilerplate": ">= 0.15.0"
   },
   "dependencies": {
     "immutable": "4.0.0-rc.9",
-    "mini-css-extract-plugin": "^0.2.0"
+    "mini-css-extract-plugin": "^0.3.0"
   },
   "publishConfig": {
     "access": "public"
