@@ -10,19 +10,10 @@ test("internal plugins match", () => {
     "caseSensitivePathsPlugin",
     "cleanPlugin",
     "copyFilesPlugin",
-    "cssExtractPlugin",
     "definePlugin",
-    "hashedModulesPlugin",
     "htmlPlugin",
     "manifestPlugin",
-    // "metaBundlePlugin",
-    // "moduleConcatenationPlugin",
-    // "namedChunksPlugin",
-    // "namedModulesPlugin",
-    // "noEmitOnErrorsPlugin",
-    // "occurrenceOrderPlugin",
     "statsPlugin",
-    // "vendorBundlePlugin",
     "watchMissingNodeModulesPlugin"
   ];
 
@@ -31,8 +22,4 @@ test("internal plugins match", () => {
     expect(typeof plugin).toBe("object");
     expect(plugin.name()).toEqual(ip);
   });
-
-  // const bp = broilerplate("production", "client", paths, overrides);
-
-  // console.log(bp);
 });

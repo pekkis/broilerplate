@@ -9,9 +9,7 @@ module.exports = {
   plugins: () =>
     OrderedSet.of(
       "caseSensitivePathsPlugin",
-      // "watchMissingNodeModulesPlugin",
       "definePlugin",
-      // "namedChunksPlugin",
       "statsPlugin",
       "cleanPlugin"
     ),

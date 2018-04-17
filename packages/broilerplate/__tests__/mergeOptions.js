@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const { pipe, empty, mergeOptions } = require("../src/broilerplate");
 const { Map } = require("immutable");
 

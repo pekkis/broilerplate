@@ -18,7 +18,6 @@ const {
   toJS
 } = require("../src/broilerplate");
 const nodeExternals = require("../src/features/nodeExternalsFeature");
-const extractCss = require("../src/features/extractCssFeature");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -44,7 +43,6 @@ module.exports = target => {
     defaultBaseConfig(env, target),
     defaultFeatures,
     addFeatures(
-      extractCss,
       "babelPolyfillFeature",
       nodeExternals({
         whitelist: [/^font-awesome/, /^react-fa/]

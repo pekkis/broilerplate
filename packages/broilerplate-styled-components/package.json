@@ -19,17 +19,17 @@
     "babel-cli": "^6.26.0",
     "babel-core": "6",
     "babel-eslint": "^7.2.3",
-    "babel-plugin-styled-components": "^1.5.0",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "eslint": "^4.1.1",
+    "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
-    "jest": "^22.4.2",
-    "styled-components": "^3.2.3"
+    "jest": "^22.4.3",
+    "styled-components": "^3.2.6"
   },
   "peerDependencies": {
     "@dr-kobros/broilerplate": ">= 0.15.0",

@@ -46,7 +46,7 @@ module.exports = target => {
     // removeLoader("fontLoader"),
     ensureFiles(false),
     compile(env, target),
-    override(path.join(__dirname, "./src/config/overrides")),
+    // override(path.join(__dirname, "./src/config/overrides")),
     run,
     toJS
   )(Map());
