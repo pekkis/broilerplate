@@ -17,27 +17,27 @@
   "devDependencies": {
     "@dr-kobros/broilerplate": "^0.15.5",
     "babel-cli": "^6.26.0",
-    "babel-core": "6",
+    "babel-core": "6.26.3",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.46.2",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "jest": "^22.4.3",
-    "webpack": "4.5.0"
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "jest": "^23.1.0",
+    "webpack": "4.12.0"
   },
   "peerDependencies": {
     "@dr-kobros/broilerplate": ">= 0.15.0"
   },
   "dependencies": {
-    "autoprefixer": "^8.3.0",
+    "autoprefixer": "^8.6.2",
     "immutable": "4.0.0-rc.9",
-    "postcss-loader": "^2.1.4",
-    "postcss-preset-env": "^4.0.0"
+    "postcss-loader": "^2.1.5",
+    "postcss-preset-env": "^5.1.0"
   },
   "publishConfig": {
     "access": "public"
