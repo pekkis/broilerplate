@@ -107,17 +107,18 @@ const override = overridesPath => build => {
   const base = build.get("base");
   const loaders = build.get("loaders", OrderedSet());
   const plugins = build.get("plugins", OrderedSet());
+  const options = build.get("options", Map());
 
   const { overrideLoader, overridePlugin, overrideBase } = overrides;
 
   const overriddenLoaders = loaders.map(l =>
-    overrideLoader(l, env, target, paths)
+    overrideLoader(l, env, target, paths, options)
   );
   const overriddenPlugins = plugins.map(p =>
-    overridePlugin(p, env, target, paths)
+    overridePlugin(p, env, target, paths, options)
   );
 
-  const overriddenBase = overrideBase(base, env, target, paths);
+  const overriddenBase = overrideBase(base, env, target, paths, options);
 
   return build
     .set("plugins", overriddenPlugins)
