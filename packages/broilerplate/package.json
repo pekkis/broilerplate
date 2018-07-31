@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.15.9",
+  "version": "0.15.10",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "bin": {
