@@ -38,22 +38,21 @@ module.exports = {
             babelrc: false,
             presets: [
               [
-                "env",
+                "@babel/preset-env",
                 {
                   debug: options.get("debug", false),
-                  useBuiltIns: true,
+                  useBuiltIns: "usage",
                   targets: getTargets(env, target, paths),
                   modules: false
                 }
               ]
             ],
             plugins: [
-              "syntax-dynamic-import",
-              "babel-plugin-transform-flow-strip-types",
-              "babel-plugin-transform-class-properties",
-              "babel-plugin-transform-object-rest-spread",
-              "babel-plugin-transform-decorators",
-              "babel-plugin-transform-react-jsx"
+              "@babel/plugin-syntax-dynamic-import",
+              "@babel/plugin-transform-flow-strip-types",
+              "@babel/plugin-proposal-class-properties",
+              "@babel/plugin-proposal-object-rest-spread",
+              "@babel/plugin-transform-react-jsx"
             ]
           }
         }

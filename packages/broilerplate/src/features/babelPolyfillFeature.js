@@ -9,7 +9,7 @@ module.exports = {
     }
 
     return values.updateIn(["entry", "client"], e =>
-      e.unshift("babel-polyfill")
+      e.unshift("@babel/polyfill")
     );
   }
 };
