@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate-postcss",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "PostCSS for Broilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "@babel/core": "^7.0.0-beta.56",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.56",
     "@babel/preset-env": "^7.0.0-beta.56",
-    "@dr-kobros/broilerplate": "^0.17.0",
+    "@dr-kobros/broilerplate": "^0.17.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.19.1",
