@@ -1,12 +1,8 @@
-const { OrderedSet, List } = require("immutable");
+const { OrderedSet } = require("immutable");
+const { createFeature } = require("../extend");
 
-module.exports = {
+module.exports = createFeature({
   name: () => "basicOptimizationFeature",
-  files: paths => List(),
   plugins: () =>
-    OrderedSet.of("occurrenceOrderPlugin", "moduleConcatenationPlugin"),
-  loaders: () => OrderedSet.of(),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideBase: (values, env, target, paths) => values
-};
+    OrderedSet.of("occurrenceOrderPlugin", "moduleConcatenationPlugin")
+});

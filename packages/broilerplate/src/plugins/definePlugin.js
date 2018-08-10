@@ -1,17 +1,15 @@
 const { List, Map } = require("immutable");
 const webpack = require("webpack");
-const Plugin = webpack.DefinePlugin;
 const { getEnvironmentVariables } = require("../env");
+const { createPlugin } = require("../extend");
 
-module.exports = {
+module.exports = createPlugin(webpack.DefinePlugin)({
   name: () => "definePlugin",
-  isEnabled: (env, target) => true,
-  options: (env, target, paths) =>
+  options: env =>
     List.of(
       Map({
-        __DEVELOPMENT__: process.env.NODE_ENV === "development",
+        __DEVELOPMENT__: env === "development",
         "process.env": getEnvironmentVariables()
       })
-    ),
-  plugin: options => new Plugin(...options)
-};
+    )
+});

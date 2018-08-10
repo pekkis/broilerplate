@@ -1,7 +1,6 @@
-const baseFeature = require("../baseFeature");
+const { createFeature } = require("../extend");
 
-module.exports = {
-  ...baseFeature,
+module.exports = createFeature({
   name: () => "babelPolyfillFeature",
   overrideBase: (values, env, target, paths) => {
     if (target === "server") {
@@ -12,4 +11,4 @@ module.exports = {
       e.unshift("@babel/polyfill")
     );
   }
-};
+});

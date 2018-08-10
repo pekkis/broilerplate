@@ -1,8 +1,7 @@
-const baseFeature = require("../baseFeature");
 const { OrderedSet } = require("immutable");
+const { createFeature } = require("../extend");
 
-module.exports = {
-  ...baseFeature,
+module.exports = createFeature({
   name: () => "babelFeature",
   loaders: () => OrderedSet.of("babelLoader")
-};
+});

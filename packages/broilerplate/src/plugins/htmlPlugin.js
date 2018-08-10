@@ -1,10 +1,11 @@
 const { List, fromJS } = require("immutable");
 const Plugin = require("html-webpack-plugin");
+const { createPlugin } = require("../extend");
 
-module.exports = {
+module.exports = createPlugin(Plugin)({
   name: () => "htmlPlugin",
   isEnabled: (env, target) => target === "client",
-  options: (env, target, paths) =>
+  options: () =>
     List.of(
       fromJS({
         title: "Hardcorest React App",
@@ -13,6 +14,5 @@ module.exports = {
         inject: "body",
         chunksSortMode: "dependency"
       })
-    ),
-  plugin: options => new Plugin(...options)
-};
+    )
+});

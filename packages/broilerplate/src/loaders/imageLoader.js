@@ -1,9 +1,8 @@
-const { fromJS, OrderedSet } = require("immutable");
+const { fromJS } = require("immutable");
+const { createLoader } = require("../extend");
 
-module.exports = {
-  supportedFeatures: () => OrderedSet.of(),
+module.exports = createLoader({
   name: () => "imageLoader",
-  isEnabled: (env, target) => true,
   options: (env, target, paths) => {
     return fromJS({
       test: /\.(png|jpg|gif|ico|svg)$/,
@@ -25,4 +24,4 @@ module.exports = {
       ]
     });
   }
-};
+});

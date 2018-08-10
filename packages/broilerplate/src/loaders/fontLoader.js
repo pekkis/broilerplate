@@ -1,9 +1,8 @@
-const { fromJS, OrderedSet } = require("immutable");
+const { fromJS } = require("immutable");
+const { createLoader } = require("../extend");
 
-module.exports = {
-  supportedFeatures: () => OrderedSet.of(),
+module.exports = createLoader({
   name: () => "fontLoader",
-  isEnabled: (env, target) => true,
   options: (env, target, paths) => {
     return fromJS({
       test: /font.*\.(woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -20,4 +19,4 @@ module.exports = {
       ]
     });
   }
-};
+});

@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const { fromJS, OrderedSet } = require("immutable");
+const { createLoader } = require("../extend");
 
 const getBrowsers = root => {
   const browserFile = fs.readFileSync(path.resolve(root, ".browserslistrc"), {
@@ -24,10 +25,8 @@ const getTargets = (env, target, paths) => {
   };
 };
 
-module.exports = {
-  supportedFeatures: () => OrderedSet.of(),
+module.exports = createLoader({
   name: () => "babelLoader",
-  isEnabled: (env, target) => true,
   options: (env, target, paths, options) => {
     return fromJS({
       test: /\.jsx?$/,
@@ -60,4 +59,4 @@ module.exports = {
       exclude: [paths.get("modules")]
     });
   }
-};
+});

@@ -6,7 +6,10 @@ const fileMapper = (chunks, assetsByChunkName, mapper, extension) => {
     .filter(chunk => chunk)
     .map(chunk => (isArray(chunk) ? chunk : [chunk]))
     .map(files =>
-      files.filter(file => file.endsWith(extension)).map(mapper).join("")
+      files
+        .filter(file => file.endsWith(extension))
+        .map(mapper)
+        .join("")
     )
     .join("");
 };

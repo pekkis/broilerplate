@@ -1,7 +1,8 @@
 const { OrderedSet, List } = require("immutable");
 const path = require("path");
+const { createFeature } = require("../extend");
 
-module.exports = {
+module.exports = createFeature({
   name: () => "assetFeature",
   files: paths =>
     List.of({
@@ -9,8 +10,5 @@ module.exports = {
       target: path.join(paths.get("root"), "src/assets")
     }),
   plugins: () => OrderedSet.of("copyFilesPlugin"),
-  loaders: () => OrderedSet.of("imageLoader", "fontLoader"),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideBase: (values, env, target, paths) => values
-};
+  loaders: () => OrderedSet.of("imageLoader", "fontLoader")
+});

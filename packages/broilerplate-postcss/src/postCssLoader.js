@@ -1,4 +1,5 @@
 const { fromJS, OrderedSet, List } = require("immutable");
+const { createLoader } = require("@dr-kobros/broilerplate/lib/extend");
 
 const getLoader = target => {
   return target === "client" ? "css-loader" : "css-loader/locals";
@@ -21,9 +22,8 @@ const getLoaders = target => {
   return target === "server" ? loaders : loaders.unshift("style-loader");
 };
 
-module.exports = {
+module.exports = createLoader({
   name: () => "postCssLoader",
-  isEnabled: (env, target) => true,
   supportedFeatures: () => OrderedSet.of("extractCssFeature"),
   options: (env, target, paths) => {
     return fromJS({
@@ -32,4 +32,4 @@ module.exports = {
       use: getLoaders(target)
     });
   }
-};
+});

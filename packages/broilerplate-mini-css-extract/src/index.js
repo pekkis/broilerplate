@@ -1,19 +1,22 @@
 const { OrderedSet, Map, List } = require("immutable");
-const baseFeature = require("@dr-kobros/broilerplate/lib/baseFeature");
+const {
+  createFeature,
+  createPlugin
+} = require("@dr-kobros/broilerplate/lib/extend");
+
 const Plugin = require("mini-css-extract-plugin");
 
-const plugin = {
+const plugin = createPlugin(Plugin)({
   name: () => "miniCssExtractPlugin",
-  isEnabled: (env, target) => env === "production",
-  options: (env, target, paths) =>
+  isEnabled: env => env === "production",
+  options: () =>
     List.of(
       Map({
         filename: "[name].[contenthash].css",
         chunkFilename: "[id].[contenthash].css"
       })
-    ),
-  plugin: options => new Plugin(...options)
-};
+    )
+});
 
 const createStyleLoader = (env, target, options) => {
   if (target === "server") {
@@ -28,11 +31,10 @@ const createStyleLoader = (env, target, options) => {
   return options.update("use", u => u.unshift(Plugin.loader));
 };
 
-module.exports = {
-  ...baseFeature,
+module.exports = createFeature({
   name: () => "miniCssExtractCssFeature",
   plugins: () => OrderedSet.of(plugin),
-  overrideLoader: (loader, env, target, paths) => {
+  overrideLoader: loader => {
     if (!loader.supportedFeatures().includes("extractCssFeature")) {
       return loader;
     }
@@ -47,4 +49,4 @@ module.exports = {
         )
     };
   }
-};
+});

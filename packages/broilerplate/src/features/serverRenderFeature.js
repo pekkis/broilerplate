@@ -1,9 +1,8 @@
-const { OrderedSet, List } = require("immutable");
+const { List } = require("immutable");
 const path = require("path");
+const { createFeature } = require("../extend");
 
-// const nodeExternals = require("webpack-node-externals");
-
-module.exports = {
+module.exports = createFeature({
   name: () => "serverRenderFeature",
   files: paths =>
     List.of(
@@ -28,25 +27,5 @@ module.exports = {
         ),
         target: path.join(paths.get("root"), "src/config/template.js")
       }
-    ),
-  plugins: () => OrderedSet.of(),
-  loaders: () => OrderedSet.of(),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideBase: (values, env, target, paths, key) => {
-    return values;
-    // TODO: why dis not work with font-awesome (dep of dep, maybe)
-    /*
-    if (target === "client") {
-      return values;
-    }
-    return values.update("externals", e =>
-      e.push(
-        nodeExternals({
-          whitelist: [/\.(?!(?:jsx?|json)$).{1,5}$/i]
-        })
-      )
-    );
-    */
-  }
-};
+    )
+});

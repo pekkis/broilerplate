@@ -1,15 +1,15 @@
 const { List, Map } = require("immutable");
 const Plugin = require("stats-webpack-plugin");
+const { createPlugin } = require("../extend");
 
-module.exports = {
+module.exports = createPlugin(Plugin)({
   name: () => "statsPlugin",
   isEnabled: (env, target) => target === "client",
-  options: (env, target, paths) =>
+  options: () =>
     List.of(
       "stats.json",
       Map({
         chunkModules: true
       })
-    ),
-  plugin: options => new Plugin(...options)
-};
+    )
+});

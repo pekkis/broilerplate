@@ -1,8 +1,7 @@
-const { OrderedSet, List } = require("immutable");
-const baseFeature = require("../baseFeature");
+const { OrderedSet } = require("immutable");
+const { createFeature } = require("../extend");
 
-module.exports = {
-  ...baseFeature,
+module.exports = createFeature({
   name: () => "externalCssFeature",
   loaders: () => OrderedSet.of("externalcssLoader")
-};
+});

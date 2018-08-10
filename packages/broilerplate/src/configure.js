@@ -1,15 +1,6 @@
 const path = require("path");
 const isString = require("lodash.isstring");
-const isFunction = require("lodash.isfunction");
-const { fromJS, List } = require("immutable");
-
-const defaultPlugin = {
-  options: () => List.of(undefined),
-  plugin: () => {
-    throw new Error("Can not instantiate plugin");
-  },
-  isEnabled: () => true
-};
+const { fromJS } = require("immutable");
 
 const getFeatures = (env, target, paths, specs) => {
   // TODO: recursive adding of features by feature?
@@ -26,32 +17,7 @@ const getObjectFromSpec = directory => spec => {
 
 const getLoader = getObjectFromSpec("loaders");
 const getFeature = getObjectFromSpec("features");
-
-const getPlugin = (...specs) => {
-  if (specs.length > 1 || isFunction(specs[0])) {
-    const [plugin, isEnabled, options] = specs;
-    return {
-      plugin: plugin || defaultPlugin.plugin,
-      isEnabled: isEnabled || defaultPlugin.isEnabled,
-      options: options || defaultPlugin.options
-    };
-  }
-
-  const [spec] = specs;
-
-  if (isString(spec)) {
-    const plugin = require(path.resolve(__dirname, "plugins", spec));
-    return {
-      ...defaultPlugin,
-      ...plugin
-    };
-  }
-
-  return {
-    ...defaultPlugin,
-    ...spec
-  };
-};
+const getPlugin = getObjectFromSpec("plugins");
 
 const buildLoader = (env, target, paths, options, loader) => {
   const opts = loader.options(env, target, paths, options);

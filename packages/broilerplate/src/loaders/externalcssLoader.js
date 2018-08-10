@@ -1,4 +1,5 @@
 const { fromJS, OrderedSet, List } = require("immutable");
+const { createLoader } = require("../extend");
 
 const getLoader = target => {
   return target === "client" ? "css-loader" : "css-loader/locals";
@@ -15,10 +16,9 @@ const getLoaders = target => {
   return target === "server" ? loaders : loaders.unshift("style-loader");
 };
 
-module.exports = {
+module.exports = createLoader({
   name: () => "externalCssLoader",
   supportedFeatures: () => OrderedSet.of("extractCssFeature"),
-  isEnabled: (env, target) => true,
   options: (env, target, paths) => {
     return fromJS({
       test: /\.css$/,
@@ -26,4 +26,4 @@ module.exports = {
       use: getLoaders(target)
     });
   }
-};
+});

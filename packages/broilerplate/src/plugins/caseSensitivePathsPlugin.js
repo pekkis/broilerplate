@@ -1,9 +1,7 @@
 const Plugin = require("case-sensitive-paths-webpack-plugin");
-const { List } = require("immutable");
+const { createPlugin } = require("../extend");
 
-module.exports = {
+module.exports = createPlugin(Plugin)({
   name: () => "caseSensitivePathsPlugin",
-  isEnabled: (env, target) => env === "development",
-  options: (env, target) => List.of(undefined),
-  plugin: options => new Plugin(...options)
-};
+  isEnabled: (env, target) => env === "development"
+});

@@ -1,11 +1,7 @@
-const { OrderedSet, List } = require("immutable");
+const { OrderedSet } = require("immutable");
+const { createFeature } = require("../extend");
 
-module.exports = {
+module.exports = createFeature({
   name: () => "manifestFeature",
-  files: paths => List(),
-  plugins: () => OrderedSet.of("manifestPlugin"),
-  loaders: () => OrderedSet.of(),
-  overrideLoader: (loader, env, target, paths) => loader,
-  overridePlugin: (plugin, env, target, paths) => plugin,
-  overrideBase: (values, env, target, paths) => values
-};
+  plugins: () => OrderedSet.of("manifestPlugin")
+});

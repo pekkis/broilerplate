@@ -1,10 +1,10 @@
-const { List } = require("immutable");
 const baseFeature = require("@dr-kobros/broilerplate/lib/baseFeature");
+const { createFeature } = require("@dr-kobros/broilerplate/lib/extend");
 
-module.exports = {
+module.exports = createFeature({
   ...baseFeature,
   name: () => "styledComponentsFeature",
-  overrideLoader: (loader, env, target, paths) => {
+  overrideLoader: loader => {
     if (loader.name() !== "babelLoader") {
       return loader;
     }
@@ -24,4 +24,4 @@ module.exports = {
           )
     };
   }
-};
+});
