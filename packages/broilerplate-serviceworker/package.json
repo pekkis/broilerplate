@@ -4,8 +4,9 @@
   "description": "Service Worker for Broilerplate",
   "main": "lib/index.js",
   "scripts": {
+    "clean": "rimraf lib",
     "build": "NODE_ENV=production babel src -d lib",
-    "prepublish": "npm run build",
+    "prepublish": "npm run clean && npm run build",
     "test": "jest"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "eslint-plugin-react": "^7.1.0",
     "jest": "^22.4.3",
     "prettier": "^1.14.2",
+    "rimraf": "^2.6.2",
     "webpack": "4.3.0"
   },
   "peerDependencies": {

@@ -1,8 +1,6 @@
-const baseFeature = require("@dr-kobros/broilerplate/lib/baseFeature");
 const { createFeature } = require("@dr-kobros/broilerplate/lib/extend");
 
 module.exports = createFeature({
-  ...baseFeature,
   name: () => "styledComponentsFeature",
   overrideLoader: loader => {
     if (loader.name() !== "babelLoader") {

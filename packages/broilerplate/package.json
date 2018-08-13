@@ -7,8 +7,9 @@
     "broilerplate": "./bin/broilerplate.js"
   },
   "scripts": {
+    "clean": "rimraf lib",
     "build": "NODE_ENV=production babel src -d lib",
-    "prepublish": "npm run test && npm run build",
+    "prepublish": "npm run test && npm run clean && npm run build",
     "build:client": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __test-app__/webpack.config.babel.js",
     "build:empty": "cross-env NODE_ENV=production webpack --display-optimization-bailout --config __empty-app__/webpack.config.babel.js",
     "build:server": "cross-env NODE_ENV=production webpack --config __test-app__/webpack.server.config.babel.js --display-optimization-bailout",
@@ -90,6 +91,7 @@
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.12.0",
+    "rimraf": "^2.6.2",
     "styled-components": "^3.3.3",
     "transit-immutable-js": "^0.7.0",
     "transit-js": "^0.8.861",
