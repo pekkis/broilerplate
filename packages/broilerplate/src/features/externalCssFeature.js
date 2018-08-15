@@ -3,5 +3,5 @@ const { createFeature } = require("../extend");
 
 module.exports = createFeature({
   name: () => "externalCssFeature",
-  loaders: () => OrderedSet.of("externalcssLoader")
+  loaders: () => OrderedSet.of("externalCssLoader")
 });
