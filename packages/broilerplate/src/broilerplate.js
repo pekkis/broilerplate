@@ -208,14 +208,11 @@ const defaultFeatures = build => {
     OrderedSet.of(
       "babelFeature",
       "basicDevelopmentFeature",
-      // "basicOptimizationFeature",
       "clientRenderFeature",
       "serverRenderFeature",
-      // "codeSplittingFeature",
       "externalCssFeature",
       "assetFeature",
       "manifestFeature"
-      // "uglifyMinifyFeature"
     ).map(getFeature)
   );
 };

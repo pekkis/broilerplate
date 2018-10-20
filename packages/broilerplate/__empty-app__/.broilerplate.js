@@ -37,7 +37,6 @@ module.exports = target => {
     ),
     defaultBaseConfig(env, target),
     defaultFeatures,
-    // addFeature("uglifyMinifyFeature"),
     removeFeature("pekkisHybridCssFeature"),
     // removePlugins("copyFilesPlugin", "manifestPlugin", "uglifyPlugin"),
     // removePlugin("copyFilesPlugin"),
