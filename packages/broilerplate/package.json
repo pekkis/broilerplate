@@ -109,10 +109,11 @@
     "imagemin": "6.0.0",
     "img-loader": "^3.0.1",
     "immutable": "4.0.0-rc.12",
-    "lodash.isstring": "^4.0.1",
+    "lodash": "^4.17.11",
     "react-dev-utils": "^6.0.5",
     "stats-webpack-plugin": "^0.7.0",
     "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.1.0",
     "url-loader": "^1.1.2",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-node-externals": "^1.7.2"

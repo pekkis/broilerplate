@@ -16,14 +16,15 @@ const getLoaders = target => {
   return target === "server" ? loaders : loaders.unshift("style-loader");
 };
 
-module.exports = createLoader({
-  name: () => "externalCssLoader",
-  supportedFeatures: () => OrderedSet.of("extractCssFeature"),
-  options: (env, target, paths) => {
-    return fromJS({
-      test: /\.css$/,
-      include: [paths.get("modules")],
-      use: getLoaders(target)
-    });
-  }
-});
+module.exports = config =>
+  createLoader({
+    name: () => "externalCssLoader",
+    supportedFeatures: () => OrderedSet.of("extractCssFeature"),
+    options: (env, target, paths) => {
+      return fromJS({
+        test: /\.css$/,
+        include: [paths.get("modules")],
+        use: getLoaders(target)
+      });
+    }
+  });

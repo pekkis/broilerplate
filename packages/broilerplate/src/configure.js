@@ -1,5 +1,6 @@
 const path = require("path");
-const isString = require("lodash.isstring");
+const isString = require("lodash/isstring");
+const isArray = require("lodash/isarray");
 const { fromJS } = require("immutable");
 
 const getFeatures = (env, target, paths, specs) => {
@@ -9,7 +10,13 @@ const getFeatures = (env, target, paths, specs) => {
 
 const getObjectFromSpec = directory => spec => {
   if (isString(spec)) {
-    return require(path.resolve(__dirname, directory, spec));
+    const func = require(path.resolve(__dirname, directory, spec));
+    return func();
+  }
+
+  if (isArray(spec)) {
+    const func = require(path.resolve(__dirname, directory, spec[0]));
+    return func(spec[1]);
   }
 
   return spec;

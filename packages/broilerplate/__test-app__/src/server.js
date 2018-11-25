@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import Root from "./ServerRoot";
 import template from "./config/template";
-import isArray from "lodash.isarray";
+import isArray from "lodash/isarray";
 import { createStore } from "./utils/redux";
 import {
   getMiddlewares,

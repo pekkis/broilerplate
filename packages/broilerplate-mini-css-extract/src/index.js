@@ -31,22 +31,23 @@ const createStyleLoader = (env, target, options) => {
   return options.update("use", u => u.unshift(Plugin.loader));
 };
 
-module.exports = createFeature({
-  name: () => "miniCssExtractCssFeature",
-  plugins: () => OrderedSet.of(plugin),
-  overrideLoader: loader => {
-    if (!loader.supportedFeatures().includes("extractCssFeature")) {
-      return loader;
-    }
+module.exports = config =>
+  createFeature({
+    name: () => "miniCssExtractCssFeature",
+    plugins: () => OrderedSet.of(plugin),
+    overrideLoader: loader => {
+      if (!loader.supportedFeatures().includes("extractCssFeature")) {
+        return loader;
+      }
 
-    return {
-      ...loader,
-      options: (env, target, path, options) =>
-        createStyleLoader(
-          env,
-          target,
-          loader.options(env, target, path, options)
-        )
-    };
-  }
-});
+      return {
+        ...loader,
+        options: (env, target, path, options) =>
+          createStyleLoader(
+            env,
+            target,
+            loader.options(env, target, path, options)
+          )
+      };
+    }
+  });

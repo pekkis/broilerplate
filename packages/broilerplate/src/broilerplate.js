@@ -213,7 +213,8 @@ const defaultFeatures = build => {
       "externalCssFeature",
       "assetFeature",
       "manifestFeature",
-      "mjsFeature"
+      "mjsFeature",
+      "uglifyFeature"
     ).map(getFeature)
   );
 };

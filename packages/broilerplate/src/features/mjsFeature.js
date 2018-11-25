@@ -21,4 +21,4 @@ const mjsFeature = createFeature({
     )
 });
 
-module.exports = mjsFeature;
+module.exports = config => mjsFeature;

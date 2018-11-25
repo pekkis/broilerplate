@@ -22,14 +22,15 @@ const getLoaders = target => {
   return target === "server" ? loaders : loaders.unshift("style-loader");
 };
 
-module.exports = createLoader({
-  name: () => "postCssLoader",
-  supportedFeatures: () => OrderedSet.of("extractCssFeature"),
-  options: (env, target, paths) => {
-    return fromJS({
-      include: [paths.get("src")],
-      test: /\.p?css$/,
-      use: getLoaders(target)
-    });
-  }
-});
+module.exports = config =>
+  createLoader({
+    name: () => "postCssLoader",
+    supportedFeatures: () => OrderedSet.of("extractCssFeature"),
+    options: (env, target, paths) => {
+      return fromJS({
+        include: [paths.get("src")],
+        test: /\.p?css$/,
+        use: getLoaders(target)
+      });
+    }
+  });

@@ -1,4 +1,4 @@
-const isArray = require("lodash.isarray");
+const isArray = require("lodash/isarray");
 
 const fileMapper = (chunks, assetsByChunkName, mapper, extension) => {
   return chunks

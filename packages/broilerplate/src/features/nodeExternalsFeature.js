@@ -3,7 +3,7 @@ const { List } = require("immutable");
 const path = require("path");
 const { createFeature } = require("../extend");
 
-module.exports = options =>
+module.exports = config =>
   createFeature({
     name: () => "nodeExternalsFeature",
     overrideBase: (values, env, target, paths) => {
@@ -12,7 +12,7 @@ module.exports = options =>
       }
 
       const nodeModulesPath = path.resolve(paths.get("root"), "./node_modules");
-      const ext = webpackNodeExternals(options);
+      const ext = webpackNodeExternals(config);
 
       const func = (context, request, callback) => {
         const fixedRequest = request.replace(`${nodeModulesPath}/`, "");

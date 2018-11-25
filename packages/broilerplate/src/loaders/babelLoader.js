@@ -25,38 +25,39 @@ const getTargets = (env, target, paths) => {
   };
 };
 
-module.exports = createLoader({
-  name: () => "babelLoader",
-  options: (env, target, paths, options) => {
-    return fromJS({
-      test: /\.jsx?$/,
-      use: [
-        {
-          loader: "babel-loader",
-          options: {
-            babelrc: false,
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  debug: options.get("debug", false),
-                  useBuiltIns: "usage",
-                  targets: getTargets(env, target, paths),
-                  modules: false
-                }
+module.exports = config =>
+  createLoader({
+    name: () => "babelLoader",
+    options: (env, target, paths, options) => {
+      return fromJS({
+        test: /\.jsx?$/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              babelrc: false,
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    debug: options.get("debug", false),
+                    useBuiltIns: "usage",
+                    targets: getTargets(env, target, paths),
+                    modules: false
+                  }
+                ]
+              ],
+              plugins: [
+                "@babel/plugin-syntax-dynamic-import",
+                "@babel/plugin-transform-flow-strip-types",
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/plugin-transform-react-jsx"
               ]
-            ],
-            plugins: [
-              "@babel/plugin-syntax-dynamic-import",
-              "@babel/plugin-transform-flow-strip-types",
-              "@babel/plugin-proposal-class-properties",
-              "@babel/plugin-proposal-object-rest-spread",
-              "@babel/plugin-transform-react-jsx"
-            ]
+            }
           }
-        }
-      ],
-      exclude: [paths.get("modules")]
-    });
-  }
-});
+        ],
+        exclude: [paths.get("modules")]
+      });
+    }
+  });

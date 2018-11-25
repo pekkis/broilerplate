@@ -17,12 +17,13 @@ const plugin = createPlugin(ServiceWorkerWebpackPlugin)({
     )
 });
 
-module.exports = createFeature({
-  name: () => "serviceWorkerFeature",
-  files: paths =>
-    List.of({
-      source: path.join(__dirname, "../files/sw.js"),
-      target: path.join(paths.get("root"), "src/sw.js")
-    }),
-  plugins: () => OrderedSet.of(plugin)
-});
+module.exports = config =>
+  createFeature({
+    name: () => "serviceWorkerFeature",
+    files: paths =>
+      List.of({
+        source: path.join(__dirname, "../files/sw.js"),
+        target: path.join(paths.get("root"), "src/sw.js")
+      }),
+    plugins: () => OrderedSet.of(plugin)
+  });
