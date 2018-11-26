@@ -23,7 +23,7 @@ test("builds", () => {
     empty,
     defaultPaths(env, target, __dirname),
     defaultBaseConfig(env, target),
-    addFeature(feature),
+    addFeature(feature()),
     compile(env, target)
   )();
 

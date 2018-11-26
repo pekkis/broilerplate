@@ -1,6 +1,6 @@
 const path = require("path");
-const isString = require("lodash/isstring");
-const isArray = require("lodash/isarray");
+const isString = require("lodash/isString");
+const isArray = require("lodash/isArray");
 const { fromJS } = require("immutable");
 
 const getFeatures = (env, target, paths, specs) => {
