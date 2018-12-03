@@ -1,9 +1,9 @@
-const { OrderedSet, List } = require("immutable");
+const { List } = require("immutable");
 
 const createLoader = loader => {
   return {
     isEnabled: (env, target) => true,
-    supportedFeatures: () => OrderedSet.of(),
+    supportedFeatures: () => List.of(),
     ...loader
   };
 };
@@ -11,8 +11,8 @@ const createLoader = loader => {
 const createFeature = feature => {
   return {
     files: paths => List.of(),
-    plugins: () => OrderedSet.of(),
-    loaders: () => OrderedSet.of(),
+    plugins: () => List.of(),
+    loaders: () => List.of(),
     overrideLoader: loader => loader,
     overridePlugin: plugin => plugin,
     overrideBase: base => base,

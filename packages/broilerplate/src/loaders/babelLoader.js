@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { fromJS, OrderedSet } = require("immutable");
+const { fromJS } = require("immutable");
 const { createLoader } = require("../extend");
 
 const getBrowsers = root => {

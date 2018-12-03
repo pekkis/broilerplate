@@ -1,4 +1,4 @@
-const { OrderedSet, Map, List } = require("immutable");
+const { Map, List } = require("immutable");
 const {
   createFeature,
   createPlugin
@@ -34,7 +34,7 @@ const createStyleLoader = (env, target, options) => {
 module.exports = config =>
   createFeature({
     name: () => "miniCssExtractCssFeature",
-    plugins: () => OrderedSet.of(plugin),
+    plugins: () => List.of(plugin),
     overrideLoader: loader => {
       if (!loader.supportedFeatures().includes("extractCssFeature")) {
         return loader;

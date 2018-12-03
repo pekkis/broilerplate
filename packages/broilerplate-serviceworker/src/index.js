@@ -1,4 +1,4 @@
-const { OrderedSet, List, Map } = require("immutable");
+const { List, Map } = require("immutable");
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require("@dr-kobros/serviceworker-webpack-plugin");
 const {
@@ -25,5 +25,5 @@ module.exports = config =>
         source: path.join(__dirname, "../files/sw.js"),
         target: path.join(paths.get("root"), "src/sw.js")
       }),
-    plugins: () => OrderedSet.of(plugin)
+    plugins: () => List.of(plugin)
   });

@@ -1,4 +1,4 @@
-const { fromJS, OrderedSet, List } = require("immutable");
+const { fromJS, List } = require("immutable");
 const { createLoader } = require("../extend");
 
 const getLoader = target => {
@@ -19,7 +19,7 @@ const getLoaders = target => {
 module.exports = config =>
   createLoader({
     name: () => "externalCssLoader",
-    supportedFeatures: () => OrderedSet.of("extractCssFeature"),
+    supportedFeatures: () => List.of("extractCssFeature"),
     options: (env, target, paths) => {
       return fromJS({
         test: /\.css$/,

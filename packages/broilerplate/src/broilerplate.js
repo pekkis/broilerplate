@@ -1,4 +1,4 @@
-const { List, OrderedSet, Map } = require("immutable");
+const { List, Map } = require("immutable");
 const {
   getFeature,
   getDefaultBaseConfig,
@@ -22,9 +22,9 @@ const empty = build => {
     options: Map({
       debug: false
     }),
-    loaders: OrderedSet(),
-    features: OrderedSet(),
-    plugins: OrderedSet()
+    loaders: List(),
+    features: List(),
+    plugins: List()
   });
 };
 
@@ -63,24 +63,20 @@ const compile = (env, target) => build => {
   const loaders = features
     .reduce(
       (loaders, f) => loaders.concat(f.loaders()),
-      build.get("loaders", OrderedSet())
+      build.get("loaders", List())
     )
     .map(l => getLoader(l))
-    .filterNot(l =>
-      build.get("removedLoaders", OrderedSet()).includes(l.name())
-    )
+    .filterNot(l => build.get("removedLoaders", List()).includes(l.name()))
     .filter(l => l.isEnabled(env, target))
     .map(l => features.reduce((l, f) => f.overrideLoader(l), l));
 
   const plugins = features
     .reduce(
       (plugins, f) => plugins.concat(f.plugins()),
-      build.get("plugins", OrderedSet())
+      build.get("plugins", List())
     )
     .map(p => getPlugin(p))
-    .filterNot(p =>
-      build.get("removedPlugins", OrderedSet()).includes(p.name())
-    )
+    .filterNot(p => build.get("removedPlugins", List()).includes(p.name()))
     .filter(p => p.isEnabled(env, target))
     .map(p => features.reduce((p, f) => f.overridePlugin(p), p));
 
@@ -105,8 +101,8 @@ const override = overridesPath => build => {
   const target = build.get("target");
   const paths = build.get("paths");
   const base = build.get("base");
-  const loaders = build.get("loaders", OrderedSet());
-  const plugins = build.get("plugins", OrderedSet());
+  const loaders = build.get("loaders", List());
+  const plugins = build.get("plugins", List());
   const options = build.get("options", Map());
 
   const { overrideLoader, overridePlugin, overrideBase } = overrides;
@@ -193,19 +189,19 @@ const removeFeature = featureName => build => {
 const removePlugins = (...plugins) => pipe(...plugins.map(removePlugin));
 
 const removePlugin = plugin => build => {
-  return build.update("removedPlugins", OrderedSet(), rp => rp.add(plugin));
+  return build.update("removedPlugins", List(), rp => rp.add(plugin));
 };
 
 const removeLoaders = (...loaders) => pipe(...loaders.map(removeLoader));
 
 const removeLoader = loader => build => {
-  return build.update("removedLoaders", OrderedSet(), rl => rl.add(loader));
+  return build.update("removedLoaders", List(), rl => rl.add(loader));
 };
 
 const defaultFeatures = build => {
   return build.set(
     "features",
-    OrderedSet.of(
+    List.of(
       "babelFeature",
       "basicDevelopmentFeature",
       "clientRenderFeature",

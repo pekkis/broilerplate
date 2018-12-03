@@ -1,4 +1,4 @@
-const { OrderedSet, List } = require("immutable");
+const { List } = require("immutable");
 const path = require("path");
 const { createFeature } = require("../extend");
 
@@ -22,5 +22,5 @@ module.exports = config =>
           target: path.join(paths.get("root"), "src/Root.js")
         }
       ),
-    plugins: () => OrderedSet.of("htmlPlugin")
+    plugins: () => List.of("htmlPlugin")
   });

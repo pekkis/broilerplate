@@ -1,8 +1,8 @@
-const { OrderedSet } = require("immutable");
+const { List } = require("immutable");
 const { createFeature } = require("../extend");
 
 module.exports = config =>
   createFeature({
     name: () => "babelFeature",
-    loaders: () => OrderedSet.of("babelLoader")
+    loaders: () => List.of("babelLoader")
   });

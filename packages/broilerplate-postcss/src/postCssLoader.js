@@ -1,4 +1,4 @@
-const { fromJS, OrderedSet, List } = require("immutable");
+const { fromJS, List } = require("immutable");
 const { createLoader } = require("@dr-kobros/broilerplate/lib/extend");
 
 const getLoader = target => {
@@ -25,7 +25,7 @@ const getLoaders = target => {
 module.exports = config =>
   createLoader({
     name: () => "postCssLoader",
-    supportedFeatures: () => OrderedSet.of("extractCssFeature"),
+    supportedFeatures: () => List.of("extractCssFeature"),
     options: (env, target, paths) => {
       return fromJS({
         include: [paths.get("src")],
