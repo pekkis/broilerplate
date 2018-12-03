@@ -174,7 +174,7 @@ const addFeatures = (...features) => pipe(...features.map(addFeature));
 
 const addFeature = feature => build => {
   return build.update("features", features =>
-    features.add(getFeature(feature))
+    features.push(getFeature(feature))
   );
 };
 
@@ -189,13 +189,13 @@ const removeFeature = featureName => build => {
 const removePlugins = (...plugins) => pipe(...plugins.map(removePlugin));
 
 const removePlugin = plugin => build => {
-  return build.update("removedPlugins", List(), rp => rp.add(plugin));
+  return build.update("removedPlugins", List(), rp => rp.push(plugin));
 };
 
 const removeLoaders = (...loaders) => pipe(...loaders.map(removeLoader));
 
 const removeLoader = loader => build => {
-  return build.update("removedLoaders", List(), rl => rl.add(loader));
+  return build.update("removedLoaders", List(), rl => rl.push(loader));
 };
 
 const defaultFeatures = build => {
