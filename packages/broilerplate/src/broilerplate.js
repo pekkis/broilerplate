@@ -208,7 +208,6 @@ const defaultFeatures = build => {
       "serverRenderFeature",
       "externalCssFeature",
       "assetFeature",
-      "manifestFeature",
       "mjsFeature",
       "uglifyFeature"
     ).map(getFeature)

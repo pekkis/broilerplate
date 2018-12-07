@@ -1,8 +1,14 @@
-const { List } = require("immutable");
+const { List, Map } = require("immutable");
 const { createFeature } = require("../extend");
 
-module.exports = config =>
+const plugin = require("../plugins/manifestPlugin");
+
+const defaultConfig = Map({
+  fileName: "manifest.json"
+});
+
+module.exports = (config = Map()) =>
   createFeature({
     name: () => "manifestFeature",
-    plugins: () => List.of("manifestPlugin")
+    plugins: () => List.of(plugin(defaultConfig.merge(config)))
   });
