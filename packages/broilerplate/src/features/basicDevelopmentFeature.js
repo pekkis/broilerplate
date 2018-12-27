@@ -4,11 +4,5 @@ const { createFeature } = require("../extend");
 module.exports = config =>
   createFeature({
     name: () => "basicDevelopmentFeature",
-    plugins: () =>
-      List.of(
-        "caseSensitivePathsPlugin",
-        "definePlugin",
-        "statsPlugin",
-        "cleanPlugin"
-      )
+    plugins: () => List.of("caseSensitivePathsPlugin", "statsPlugin")
   });

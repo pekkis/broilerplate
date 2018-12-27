@@ -204,6 +204,8 @@ const defaultFeatures = build => {
     List.of(
       "babelFeature",
       "basicDevelopmentFeature",
+      "cleanDirectoriesFeature",
+      "environmentVariablesFeature",
       "clientRenderFeature",
       "serverRenderFeature",
       "externalCssFeature",
