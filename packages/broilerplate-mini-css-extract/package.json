@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate-mini-css-extract",
-  "version": "0.24.2",
+  "version": "0.24.3",
   "description": "MiniCssExtract for Broilerplate",
   "main": "lib/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/preset-env": "^7.3.1",
-    "@dr-kobros/broilerplate": "^0.24.2",
+    "@dr-kobros/broilerplate": "^0.24.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "10.0.2",
     "babel-jest": "^24.1.0",
