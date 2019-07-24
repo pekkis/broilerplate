@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/broilerplate",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "description": "React Reusable Broilerplate",
   "main": "lib/index.js",
   "bin": {
@@ -29,12 +29,12 @@
     "@babel/preset-env": "^7.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "8",
+    "core-js": "2 | 3",
     "cross-env": ">= 5.1.3",
     "dotenv": ">= 5.0.0",
     "react": ">= 16",
     "react-dom": ">= 16",
-    "webpack": "4",
-    "core-js": "2 | 3"
+    "webpack": "4"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

@@ -2,7 +2,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "version": "0.24.1",
+  "version": "0.24.2",
   "npmClient": "npm",
   "useWorkspaces": true
 }
