@@ -43,7 +43,8 @@ module.exports = config =>
                     debug: options.get("debug", false),
                     useBuiltIns: "usage",
                     targets: getTargets(env, target, paths),
-                    modules: false
+                    modules: false,
+                    corejs: options.get("corejs", 3)
                   }
                 ]
               ],
