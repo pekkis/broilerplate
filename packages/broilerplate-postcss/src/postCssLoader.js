@@ -10,9 +10,10 @@ const getLoaders = target => {
     {
       loader: getLoader(target),
       options: {
-        modules: true,
-        importLoaders: 2,
-        localIdentName: "[name]__[local]__[hash:base64:5]"
+        modules: {
+          localIdentName: "[name]__[local]__[hash:base64:5]"
+        },
+        importLoaders: 2
       }
     },
     {
