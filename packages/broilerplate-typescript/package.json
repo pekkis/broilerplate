@@ -1,7 +1,7 @@
 {
-  "name": "@dr-kobros/broilerplate-mini-css-extract",
+  "name": "@dr-kobros/broilerplate-typescript",
   "version": "0.24.3",
-  "description": "MiniCssExtract for Broilerplate",
+  "description": "TypeScript for Broilerplate",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
@@ -18,30 +18,32 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@dr-kobros/broilerplate": "^0.24.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
-    "babel-jest": "^24.1.0",
+    "babel-jest": "^24.8.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-react-app": "^5.0.1",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "jest": "^24.1.0",
-    "prettier": "^1.16.4",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
-    "webpack": "4.40.1"
+    "styled-components": "^4.3.2"
   },
   "peerDependencies": {
-    "@dr-kobros/broilerplate": ">= 0.16.0"
+    "@dr-kobros/broilerplate": ">= 0.16.0",
+    "babel-plugin-styled-components": "^1.5.0",
+    "styled-components": ">= 2.0.0"
   },
   "dependencies": {
-    "immutable": "4.0.0-rc.12",
-    "mini-css-extract-plugin": "^0.8.0"
+    "immutable": "4.0.0-rc.12"
   },
   "publishConfig": {
     "access": "public"

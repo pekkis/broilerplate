@@ -4,5 +4,8 @@
   ],
   "version": "0.24.4",
   "npmClient": "npm",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "packages": [
+    "packages/*"
+  ]
 }

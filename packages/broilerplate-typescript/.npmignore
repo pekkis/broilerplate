@@ -1,0 +1,7 @@
+src/
+.babelrc
+.eslintrc
+.gitignore
+yarn.lock
+.git/
+__tests__/

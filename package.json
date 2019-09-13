@@ -3,5 +3,8 @@
   "name": "broilerplate-lerna",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "lerna": "^3.16.2"
+  }
 }
