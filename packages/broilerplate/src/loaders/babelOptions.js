@@ -36,14 +36,17 @@ module.exports = (env, target, paths, options) => {
           modules: false,
           corejs: options.get("corejs", 3)
         }
+      ],
+      [
+        "@babel/preset-react",
+        {
+          development: env === "development"
+        }
       ]
     ],
     plugins: [
       "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-transform-flow-strip-types",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-transform-react-jsx"
+      "@babel/plugin-proposal-class-properties"
     ]
   };
 };
