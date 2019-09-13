@@ -38,12 +38,12 @@
     "styled-components": "^4.3.2"
   },
   "peerDependencies": {
-    "@dr-kobros/broilerplate": ">= 0.16.0",
-    "babel-plugin-styled-components": "^1.5.0",
-    "styled-components": ">= 2.0.0"
+    "@dr-kobros/broilerplate": ">= 0.25.0",
+    "typescript": "*"
   },
   "dependencies": {
-    "immutable": "4.0.0-rc.12"
+    "immutable": "4.0.0-rc.12",
+    "ts-loader": "^6"
   },
   "publishConfig": {
     "access": "public"
