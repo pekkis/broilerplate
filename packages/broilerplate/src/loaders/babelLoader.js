@@ -7,7 +7,7 @@ module.exports = config =>
     name: () => "babelLoader",
     options: (env, target, paths, options) => {
       return fromJS({
-        test: /\.jsx?$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: [
           {
             loader: "babel-loader",
