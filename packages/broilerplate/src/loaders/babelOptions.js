@@ -27,8 +27,8 @@ module.exports = (env, target, paths, options) => {
   return {
     babelrc: false,
     presets: [
+      "@babel/preset-typescript",
       [
-        "@babel/preset-typescript",
         "@babel/preset-env",
         {
           debug: options.get("debug", false),
