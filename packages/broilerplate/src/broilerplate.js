@@ -179,11 +179,11 @@ const addFeature = feature => build => {
 };
 
 const removeEntry = entry => build => {
-  return build.deleteIn(["entry", entry]);
+  return build.deleteIn(["base", "entry", entry]);
 };
 
 const setEntry = (entry, file) => build => {
-  return build.setIn(["entry", entry], file);
+  return build.updateIn(["base", "entry", entry], e => e.butLast().push(file));
 };
 
 const removeFeatures = (...features) => pipe(...features.map(removeFeature));
