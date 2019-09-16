@@ -60,7 +60,7 @@ const getDefaultBaseConfig = (env, target, paths) => {
     externals: [],
     resolve: {
       modules: [paths.get("src"), paths.get("modules")],
-      extensions: [".js", ".jsx"]
+      extensions: [".js", ".jsx", ".ts", ".tsx"]
     },
     entry: {
       [target]: [getEntry(env, target)]

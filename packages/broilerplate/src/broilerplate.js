@@ -178,6 +178,14 @@ const addFeature = feature => build => {
   );
 };
 
+const removeEntry = entry => build => {
+  return build.deleteIn(["entry", entry]);
+};
+
+const setEntry = (entry, file) => build => {
+  return build.setIn(["entry", entry], file);
+};
+
 const removeFeatures = (...features) => pipe(...features.map(removeFeature));
 
 const removeFeature = featureName => build => {
@@ -233,6 +241,8 @@ module.exports = {
   removePlugin,
   removeLoaders,
   removePlugins,
+  removeEntry,
+  setEntry,
   override,
   compile,
   run,
